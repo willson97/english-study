@@ -521,10 +521,27 @@ body::after {
 .dot:nth-child(3) { animation-delay: 0.4s; }
 @keyframes blink { 0%,80%,100% { opacity: 0.3; } 40% { opacity: 1; } }
 
-.conv-input-row {
-  display: flex;
-  gap: 8px;
+/* CONV 음성 버튼 */
+.conv-mic-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
 }
+.conv-mic-btn:hover { border-color: var(--accent2); color: var(--text); }
+.conv-mic-btn.listening {
+  background: var(--accent3);
+  border-color: var(--accent3);
+  color: #fff;
+  animation: pulse-ring 1s ease infinite;
+}
+.conv-mic-btn.disabled { opacity: 0.3; cursor: default; }
 .conv-input {
   flex: 1;
   padding: 12px 16px;
@@ -747,7 +764,8 @@ body::after {
       </div>
       <div class="conv-suggestions" id="convSuggestions"></div>
       <div class="conv-input-row">
-        <input class="conv-input" id="convInput" type="text" placeholder="영어로 말해보세요..." onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="conv-mic-btn" id="convMicBtn" onclick="toggleConvMic()" title="음성으로 말하기">🎤</button>
+        <input class="conv-input" id="convInput" type="text" placeholder="영어로 말하거나 입력하세요..." onkeydown="if(event.key==='Enter')sendMessage()">
         <button class="send-btn" id="sendBtn" onclick="sendMessage()">전송</button>
       </div>
     </div>
@@ -1854,7 +1872,71 @@ async function startConv() {
   }
 }
 
-async function sendMessage() {
+// ============================================================
+//  CONVERSATION 음성 입력
+// ============================================================
+let convRecognition = null;
+let convListening = false;
+
+function toggleConvMic() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    showToast('⚠️ 이 브라우저는 음성 인식을 지원하지 않습니다');
+    return;
+  }
+  if (convListening) {
+    stopConvMic();
+    return;
+  }
+  startConvMic(SpeechRecognition);
+}
+
+function startConvMic(SpeechRecognition) {
+  convRecognition = new SpeechRecognition();
+  convRecognition.lang = 'en-US';
+  convRecognition.continuous = false;
+  convRecognition.interimResults = true;
+
+  const btn = document.getElementById('convMicBtn');
+  const input = document.getElementById('convInput');
+
+  convListening = true;
+  btn.classList.add('listening');
+  btn.textContent = '⏹';
+  input.placeholder = '듣는 중...';
+
+  convRecognition.onresult = (e) => {
+    const transcript = e.results[e.results.length - 1][0].transcript;
+    input.value = transcript;
+    if (e.results[e.results.length - 1].isFinal) {
+      stopConvMic();
+      // 최종 인식 완료 시 자동 전송
+      if (transcript.trim()) sendMessage();
+    }
+  };
+
+  convRecognition.onerror = (e) => {
+    if (e.error !== 'aborted') showToast('⚠️ 음성 인식 오류: ' + e.error);
+    stopConvMic();
+  };
+
+  convRecognition.onend = () => stopConvMic();
+
+  try { convRecognition.start(); }
+  catch(e) { stopConvMic(); }
+}
+
+function stopConvMic() {
+  convListening = false;
+  const btn = document.getElementById('convMicBtn');
+  const input = document.getElementById('convInput');
+  if (btn) { btn.classList.remove('listening'); btn.textContent = '🎤'; }
+  if (input) input.placeholder = '영어로 말하거나 입력하세요...';
+  try { convRecognition?.stop(); } catch(e) {}
+  convRecognition = null;
+}
+
+
   const input = document.getElementById('convInput');
   const text = input.value.trim();
   if (!text) return;
