@@ -666,10 +666,10 @@ body::after {
 <div class="main">
   <!-- Tabs -->
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('flashcard')"><span class="icon">🃏</span>플래시카드</button>
-    <button class="tab-btn" onclick="switchTab('quiz')"><span class="icon">🎯</span>퀴즈</button>
-    <button class="tab-btn" onclick="switchTab('fill')"><span class="icon">✏️</span>빈칸채우기</button>
-    <button class="tab-btn" onclick="switchTab('conv')"><span class="icon">💬</span>대화연습</button>
+    <button class="tab-btn active" onclick="switchTab('flashcard', this)"><span class="icon">🃏</span>플래시카드</button>
+    <button class="tab-btn" onclick="switchTab('quiz', this)"><span class="icon">🎯</span>퀴즈</button>
+    <button class="tab-btn" onclick="switchTab('fill', this)"><span class="icon">✏️</span>빈칸채우기</button>
+    <button class="tab-btn" onclick="switchTab('conv', this)"><span class="icon">💬</span>대화연습</button>
   </div>
 
   <!-- FLASHCARD -->
@@ -1224,97 +1224,6 @@ She will need some hands-on experience before we put her to any real work, but s
 * hands-on experience: 실질적인 경험
 * go over: 어떤 과정 등을 누구에게 가르칠 목적으로 보여주다`;
 
-function parseContent(raw) {
-  const episodes = [];
-  const lines = raw.split('\n');
-  let currentEp = null;
-  let i = 0;
-
-  while (i < lines.length) {
-    const line = lines[i].trim();
-    if (line.startsWith('Episode:')) {
-      if (currentEp) episodes.push(currentEp);
-      currentEp = {
-        title: line.replace('Episode:', '').trim(),
-        topic: '',
-        sentences: [],   // 예문 + 대화문 모두 포함 (isDialogue 플래그로 구분)
-        dialogues: []    // 대화 그룹 (대화 탭용)
-      };
-    } else if (line.startsWith('주제:') && currentEp) {
-      currentEp.topic = line.replace('주제:', '').trim();
-    } else if (line === '{' && currentEp) {
-      // dialogue block — sentences에도 추가, dialogues에도 그룹으로 추가
-      const dialogue = [];
-      i++;
-      while (i < lines.length && lines[i].trim() !== '}') {
-        const dl = lines[i].trim();
-        if (dl && !dl.startsWith('*')) {
-          const ni = i + 1;
-          if (ni < lines.length) {
-            const nextLine = lines[ni].trim();
-            if (nextLine && !nextLine.startsWith('*') && nextLine !== '}') {
-              const audioId = AUDIO_ID_MAP[nextLine.trim()] || null;
-              const entry = { korean: dl, english: nextLine, vocab: [], audioId: audioId, isDialogue: true };
-              currentEp.sentences.push(entry);
-              dialogue.push(entry);
-              i = ni;
-            }
-          }
-        }
-        i++;
-      }
-      if (dialogue.length) currentEp.dialogues.push(dialogue);
-    } else if (line && !line.startsWith('*') && !line.startsWith('출처') && !line.startsWith('id:') && currentEp) {
-      // 예문 라인
-      const nextIdx = i + 1;
-      if (nextIdx < lines.length) {
-        const nextLine = lines[nextIdx].trim();
-        if (nextLine && !nextLine.startsWith('*') && nextLine !== '{' && nextLine !== '}' && !nextLine.startsWith('Episode:') && !nextLine.startsWith('주제:')) {
-          // collect vocab
-          const vocab = [];
-          let vi = nextIdx + 1;
-          while (vi < lines.length && lines[vi].trim().startsWith('*')) {
-            vocab.push(lines[vi].trim().replace(/^\*+\s*/, ''));
-            vi++;
-          }
-          const audioId = AUDIO_ID_MAP[nextLine.trim()] || null;
-          currentEp.sentences.push({
-            korean: line,
-            english: nextLine,
-            vocab: vocab,
-            audioId: audioId,
-            isDialogue: false
-          });
-          i = vi - 1;
-        }
-      }
-    }
-    i++;
-  }
-  if (currentEp) episodes.push(currentEp);
-  return episodes;
-}
-
-const EPISODES = parseContent(RAW);
-let currentEpIdx = 0;
-
-// FLASHCARD STATE
-let fcCards = [];
-let fcIdx = 0;
-let fcFlipped = false;
-
-// QUIZ STATE
-let quizItems = [];
-let quizIdx = 0;
-let quizScore = 0;
-let quizAnswered = false;
-
-// FILL STATE
-let fillItems = [];
-let fillIdx = 0;
-
-// CONV STATE
-let convHistory = [];
 
 const AUDIO_ID_MAP = {
   "Let's just use this for now.": "ppalmmo_live_065",
@@ -1407,6 +1316,98 @@ const AUDIO_ID_MAP = {
   "Generally speaking, higher education leads to a better quality of life, but there are plenty of real life cases that suggest otherwise.": "ppalmmo_live_324"
 };
 
+
+function parseContent(raw) {
+  const episodes = [];
+  const lines = raw.split('\n');
+  let currentEp = null;
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i].trim();
+    if (line.startsWith('Episode:')) {
+      if (currentEp) episodes.push(currentEp);
+      currentEp = {
+        title: line.replace('Episode:', '').trim(),
+        topic: '',
+        sentences: [],   // 예문 + 대화문 모두 포함 (isDialogue 플래그로 구분)
+        dialogues: []    // 대화 그룹 (대화 탭용)
+      };
+    } else if (line.startsWith('주제:') && currentEp) {
+      currentEp.topic = line.replace('주제:', '').trim();
+    } else if (line === '{' && currentEp) {
+      // dialogue block — sentences에도 추가, dialogues에도 그룹으로 추가
+      const dialogue = [];
+      i++;
+      while (i < lines.length && lines[i].trim() !== '}') {
+        const dl = lines[i].trim();
+        if (dl && !dl.startsWith('*')) {
+          const ni = i + 1;
+          if (ni < lines.length) {
+            const nextLine = lines[ni].trim();
+            if (nextLine && !nextLine.startsWith('*') && nextLine !== '}') {
+              const audioId = AUDIO_ID_MAP[nextLine.trim()] || null;
+              const entry = { korean: dl, english: nextLine, vocab: [], audioId: audioId, isDialogue: true };
+              currentEp.sentences.push(entry);
+              dialogue.push(entry);
+              i = ni;
+            }
+          }
+        }
+        i++;
+      }
+      if (dialogue.length) currentEp.dialogues.push(dialogue);
+    } else if (line && !line.startsWith('*') && !line.startsWith('출처') && !line.startsWith('id:') && currentEp) {
+      // 예문 라인
+      const nextIdx = i + 1;
+      if (nextIdx < lines.length) {
+        const nextLine = lines[nextIdx].trim();
+        if (nextLine && !nextLine.startsWith('*') && nextLine !== '{' && nextLine !== '}' && !nextLine.startsWith('Episode:') && !nextLine.startsWith('주제:')) {
+          // collect vocab
+          const vocab = [];
+          let vi = nextIdx + 1;
+          while (vi < lines.length && lines[vi].trim().startsWith('*')) {
+            vocab.push(lines[vi].trim().replace(/^\*+\s*/, ''));
+            vi++;
+          }
+          const audioId = AUDIO_ID_MAP[nextLine.trim()] || null;
+          currentEp.sentences.push({
+            korean: line,
+            english: nextLine,
+            vocab: vocab,
+            audioId: audioId,
+            isDialogue: false
+          });
+          i = vi - 1;
+        }
+      }
+    }
+    i++;
+  }
+  if (currentEp) episodes.push(currentEp);
+  return episodes;
+}
+
+const EPISODES = parseContent(RAW);
+let currentEpIdx = 0;
+
+// FLASHCARD STATE
+let fcCards = [];
+let fcIdx = 0;
+let fcFlipped = false;
+
+// QUIZ STATE
+let quizItems = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+// FILL STATE
+let fillItems = [];
+let fillIdx = 0;
+
+// CONV STATE
+let convHistory = [];
 // ============================================================
 //  AUDIO ENGINE
 // ============================================================
@@ -1464,6 +1465,13 @@ function toggleAutoPlay() {
 //  INIT
 // ============================================================
 function init() {
+  console.log('[빨모쌤] EPISODES 개수:', EPISODES.length);
+  if (EPISODES.length === 0) {
+    console.error('[빨모쌤] EPISODES가 비어있음! parseContent 실패 가능성');
+    document.getElementById('fcKorean').textContent = '로드 오류 - 콘솔 확인';
+    return;
+  }
+  console.log('[빨모쌤] 첫 에피소드:', EPISODES[0].title, '문장수:', EPISODES[0].sentences.length);
   renderEpisodeList();
   selectEpisode(0);
 }
@@ -1481,6 +1489,7 @@ function renderEpisodeList() {
 function selectEpisode(idx) {
   currentEpIdx = idx;
   const ep = EPISODES[idx];
+  if (!ep) { console.error('[빨모쌤] EPISODES[' + idx + '] 없음'); return; }
   document.querySelector('.episode-badge').textContent = `📚 ${ep.title} ▾`;
   renderEpisodeList();
   toggleEpisodeSelector(true);
@@ -1499,11 +1508,11 @@ function closeEpisodeSelector(e) {
   if (e.target.id === 'episodeSelector') toggleEpisodeSelector(true);
 }
 
-function switchTab(id) {
+function switchTab(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
 // ============================================================
