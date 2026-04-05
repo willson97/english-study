@@ -1238,13 +1238,13 @@ function parseContent(raw) {
       currentEp = {
         title: line.replace('Episode:', '').trim(),
         topic: '',
-        sentences: [],
-        dialogues: []
+        sentences: [],   // 예문 + 대화문 모두 포함 (isDialogue 플래그로 구분)
+        dialogues: []    // 대화 그룹 (대화 탭용)
       };
     } else if (line.startsWith('주제:') && currentEp) {
       currentEp.topic = line.replace('주제:', '').trim();
     } else if (line === '{' && currentEp) {
-      // dialogue block
+      // dialogue block — sentences에도 추가, dialogues에도 그룹으로 추가
       const dialogue = [];
       i++;
       while (i < lines.length && lines[i].trim() !== '}') {
@@ -1255,7 +1255,9 @@ function parseContent(raw) {
             const nextLine = lines[ni].trim();
             if (nextLine && !nextLine.startsWith('*') && nextLine !== '}') {
               globalAudioIdx++;
-              dialogue.push({ korean: dl, english: nextLine, audioIdx: globalAudioIdx });
+              const entry = { korean: dl, english: nextLine, vocab: [], audioIdx: globalAudioIdx, isDialogue: true };
+              currentEp.sentences.push(entry);
+              dialogue.push(entry);
               i = ni;
             }
           }
@@ -1264,7 +1266,7 @@ function parseContent(raw) {
       }
       if (dialogue.length) currentEp.dialogues.push(dialogue);
     } else if (line && !line.startsWith('*') && !line.startsWith('출처') && !line.startsWith('id:') && currentEp) {
-      // potential Korean line
+      // 예문 라인
       const nextIdx = i + 1;
       if (nextIdx < lines.length) {
         const nextLine = lines[nextIdx].trim();
@@ -1281,7 +1283,8 @@ function parseContent(raw) {
             korean: line,
             english: nextLine,
             vocab: vocab,
-            audioIdx: globalAudioIdx
+            audioIdx: globalAudioIdx,
+            isDialogue: false
           });
           i = vi - 1;
         }
