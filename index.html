@@ -1229,7 +1229,6 @@ function parseContent(raw) {
   const lines = raw.split('\n');
   let currentEp = null;
   let i = 0;
-  let globalAudioIdx = 0; // 전체 순번 (mp3 파일명과 1:1 매핑)
 
   while (i < lines.length) {
     const line = lines[i].trim();
@@ -1254,8 +1253,8 @@ function parseContent(raw) {
           if (ni < lines.length) {
             const nextLine = lines[ni].trim();
             if (nextLine && !nextLine.startsWith('*') && nextLine !== '}') {
-              globalAudioIdx++;
-              const entry = { korean: dl, english: nextLine, vocab: [], audioIdx: globalAudioIdx, isDialogue: true };
+              const audioId = AUDIO_ID_MAP[nextLine.trim()] || null;
+              const entry = { korean: dl, english: nextLine, vocab: [], audioId: audioId, isDialogue: true };
               currentEp.sentences.push(entry);
               dialogue.push(entry);
               i = ni;
@@ -1278,12 +1277,12 @@ function parseContent(raw) {
             vocab.push(lines[vi].trim().replace(/^\*+\s*/, ''));
             vi++;
           }
-          globalAudioIdx++;
+          const audioId = AUDIO_ID_MAP[nextLine.trim()] || null;
           currentEp.sentences.push({
             korean: line,
             english: nextLine,
             vocab: vocab,
-            audioIdx: globalAudioIdx,
+            audioId: audioId,
             isDialogue: false
           });
           i = vi - 1;
@@ -1317,35 +1316,122 @@ let fillIdx = 0;
 // CONV STATE
 let convHistory = [];
 
+const AUDIO_ID_MAP = {
+  "Let's just use this for now.": "ppalmmo_live_065",
+  "This is it for now.": "ppalmmo_live_066",
+  "This will be enough for now.": "ppalmmo_live_067",
+  "What do we call her?": "ppalmmo_live_068",
+  "How about Friday?": "ppalmmo_live_069",
+  "Friday? Are you serious?": "ppalmmo_live_070",
+  "What? That's legit girl's name.": "ppalmmo_live_071",
+  "Fine. We'll call her Friday for now. but let's see what else we can come up with. I want to give her a pretty name.": "ppalmmo_live_072",
+  "This isn't a long-term solution, but for now, it's the best we've got.": "ppalmmo_live_073",
+  "Fow now, let's just keep this between us until we have more certainty.": "ppalmmo_live_074",
+  "Something came up at work and it looks like I'm going to have to put my travel plans on hold for now.": "ppalmmo_live_075",
+  "I know you want to help, but you're still new and it'll be a while before you can start doing any real work. So for now, just focus on learning as much as you can.": "ppalmmo_live_076",
+  "I think we've done enough for today, let's continue tomorrow.": "ppalmmo_live_077",
+  "It looks like they're closed for the day, let's come back tomorrow.": "ppalmmo_live_078",
+  "Thanks, but I'm good. I think I've had enough to drink for tonight.": "ppalmmo_live_079",
+  "it says here they're fully booked for the week. The earliest is next month.": "ppalmmo_live_080",
+  "There's been a slight delay, so it looks like we're going to have to make do with what we have for the time being.": "ppalmmo_live_081",
+  "I enjoyed the movie for the most part.": "ppalmmo_live_082",
+  "The date went OK for the most part.": "ppalmmo_live_083",
+  "I prefer cats over dogs for the most part.": "ppalmmo_live_084",
+  "This movie looks fun.": "ppalmmo_live_085",
+  "Oh, that? I saw it right when it came out.": "ppalmmo_live_086",
+  "You did? How was it?": "ppalmmo_live_087",
+  "It was OK for the most part. It's not that different from the one that came out a few years ago.": "ppalmmo_live_088",
+  "I didn't realized there was a prequel.": "ppalmmo_live_089",
+  "Oh, this one isn't really a sequel. It's more like a reboot.": "ppalmmo_live_090",
+  "For the most part, I think that it was a smart decision.": "ppalmmo_live_091",
+  "For the most part, I'd say she's been adapting pretty well.": "ppalmmo_live_092",
+  "For the most part, learning a foreign language is similar to adapting to a foreign culture.": "ppalmmo_live_093",
+  "We were met with a few critical moments, but I feel like we handled each one pretty well for the most part.": "ppalmmo_live_094",
+  "Did you have a nice trip?": "ppalmmo_live_095",
+  "For the most part, yes.": "ppalmmo_live_096",
+  "Is this what you had in mind?": "ppalmmo_live_097",
+  "Not entirely, but for the most part, yes.": "ppalmmo_live_098",
+  "Are you closed with your sister?": "ppalmmo_live_099",
+  "I'd say we are for the most part.  We do argue a lot, but all brothers and sisters do that, right?": "ppalmmo_live_100",
+  "How did the interview go?": "ppalmmo_live_101",
+  "Well, for the most part, it was a complete diaster. But I actually learned a few things about the company that gave me second thoughts about working there.": "ppalmmo_live_102",
+  "You're pretty good for a begineer.": "ppalmmo_live_141",
+  "She looks really good for he age.": "ppalmmo_live_142",
+  "For a weekday, it was pretty crowded.": "ppalmmo_live_143",
+  "Where did you find her?": "ppalmmo_live_144",
+  "In a parking lot. She was hiding under a car. How does she look?": "ppalmmo_live_145",
+  "Well, for a stray, she looks to be in fairly good condition. I'd put hre somewhere around 4 months old.": "ppalmmo_live_146",
+  "Really? She's kind of small for a 4 month old, right?": "ppalmmo_live_147",
+  "I guess you could say that. Do you own any other dogs?": "ppalmmo_live_148",
+  "No, I don't.": "ppalmmo_live_149",
+  "Really? For someone who doesn't own a dog, you seem to be quite comfortable handling her.": "ppalmmo_live_150",
+  "I have a lot of friends who do.": "ppalmmo_live_151",
+  "That's good.": "ppalmmo_live_152",
+  "It's not bad for a ten-thousand-won pizza.": "ppalmmo_live_153",
+  "It offers a lot of privacy for an apartment.": "ppalmmo_live_154",
+  "It's kind of expensive for a compact car. I think we should keep looking.": "ppalmmo_live_155",
+  "Wow, It's in really good condition for such an old hotel. They must spend a lot on maintenance.": "ppalmmo_live_156",
+  "Are you sure you want to work there? It's kind of far for a part-time job.": "ppalmmo_live_157",
+  "For a computer that's well over 10 years old, it's still quite usable.": "ppalmmo_live_158",
+  "For a dog that's been neglected for so long, it's in surprisingly good health and spirits.": "ppalmmo_live_159",
+  "For someone who has never had any formal training, I'd say she did an excellent job.": "ppalmmo_live_160",
+  "For a TV show that is only in its first season, it has already been gaining a lot of attention.": "ppalmmo_live_161",
+  "For someone who has just lost his job, you're in a surprisingly good mood.": "ppalmmo_live_162",
+  "Come on. It's not like I do that every day.": "ppalmmo_live_223",
+  "What's the big deal? It's not like I cursed or anything.": "ppalmmo_live_224",
+  "I'm so worried. It's not like I have friends there.": "ppalmmo_live_225",
+  "The other day, Frank told me about this business idea he had and I just told him what I thought and now he's upset with me. It's not like I said his idea was dumb.": "ppalmmo_live_226",
+  "What did you say exactly?": "ppalmmo_live_227",
+  "I said it didn't seem like it was enough to appeal to modern consumers. It's not like I have to agree with him on everything, right?": "ppalmmo_live_228",
+  "Don't worry. It's not like we don't have other options.": "ppalmmo_live_229",
+  "I think It's too fast. It's not like we know each other that well.": "ppalmmo_live_230",
+  "Don't worry about it. It's no like you broke the law. Plus, they know you. I'm sure they'll understand.": "ppalmmo_live_231",
+  "Don't be so hard on him. It's not like it was on purpose. And he already apologized to you twice, did't he?": "ppalmmo_live_232",
+  "this is a great opportunity for you. You shoudn't be worried about Allan. It's not like the two of you are married.": "ppalmmo_live_233",
+  "This isn't that bad. It used to be a lot worse. Don't worry. You'll get used to it. Besides, it's not like we have any other choice.": "ppalmmo_live_234",
+  "We should probably just get someone to do it. You know. Hire some one. It's not like any of us has done this before or know how to do it.": "ppalmmo_live_235",
+  "Why are you so nervous? It's not like they're interviewing you. Besides, you've met them before. Just be yourself and you'll be fine.": "ppalmmo_live_236",
+  "It could use a new finish. Otherwise, it's in really good condition.": "ppalmmo_live_311",
+  "We should probably let everyone know we're brothers and sisters before they start thinking otherwise.": "ppalmmo_live_312",
+  "We should get going. Otherwise, we'll miss the beginning. You know I can't drive fast like you.": "ppalmmo_live_313",
+  "Right. Urgh. Why did I have to hurt my ankle? Otherwise, I wouldn't have asked you to drive in the rain.": "ppalmmo_live_314",
+  "Don't worry. I am slow, but otherwise, pretty comfortable behind the wheel.": "ppalmmo_live_315",
+  "I know. And can I be real honest with you? I'm actually psyched I got injured. What would've otherwise been a normal week at work is now a vacation week with you.": "ppalmmo_live_316",
+  "Remember to save your work frequently, otherwise you can lose hours of precious work.": "ppalmmo_live_317",
+  "We had to leave early. Othewise, we wouldn't have made it on time.": "ppalmmo_live_318",
+  "The missing child was found several days later slightly malnourished, but otherwise, unhurt and in fairly good health.": "ppalmmo_live_319",
+  "Investigators have concluded that it was just a very unforunate accident. But, there is still a large number of people who believe otherwise.": "ppalmmo_live_320",
+  "The weather completely ruined what would have otherwise been a perfect evening.": "ppalmmo_live_321",
+  "The scandal pretty much ended what would have otherwise been a very successful career for him.": "ppalmmo_live_322",
+  "She claims she had no knowledge of that, but all of her actions suggest otherwise.": "ppalmmo_live_323",
+  "Generally speaking, higher education leads to a better quality of life, but there are plenty of real life cases that suggest otherwise.": "ppalmmo_live_324"
+};
+
 // ============================================================
 //  AUDIO ENGINE
 // ============================================================
-// GitHub Pages 기준 경로: audio/ppalmmo_live_001.mp3
-// 다른 시리즈 추가 시 id 값(예: ppalmmo_s2)을 변경
 const AUDIO_BASE = 'audio/';
-const AUDIO_PREFIX = 'ppalmmo_live_';
 
 let currentAudio = null;
 let autoPlayEnabled = false;
 
-function getAudioPath(audioIdx) {
-  if (!audioIdx) return null;
-  return `${AUDIO_BASE}${AUDIO_PREFIX}${String(audioIdx).padStart(3,'0')}.mp3`;
+function getAudioPath(audioId) {
+  if (!audioId) return null;
+  return `${AUDIO_BASE}${audioId}.mp3`;
 }
 
-function playAudio(audioIdx, btnEl) {
-  if (!audioIdx) {
+function playAudio(audioId, btnEl) {
+  if (!audioId) {
     showToast('⚠️ 이 문장은 오디오가 없습니다');
     return;
   }
-  // 이미 재생 중이면 정지
   if (currentAudio && !currentAudio.paused) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
     document.querySelectorAll('.audio-btn').forEach(b => b.classList.remove('playing'));
     if (btnEl) { btnEl.textContent = '🔊 듣기'; return; }
   }
-  const path = getAudioPath(audioIdx);
+  const path = getAudioPath(audioId);
   currentAudio = new Audio(path);
   if (btnEl) {
     btnEl.classList.add('playing');
@@ -1364,7 +1450,7 @@ function playCardAudio() {
   if (!fcCards.length) return;
   const card = fcCards[fcIdx];
   const btn = document.getElementById('fcAudioBtn');
-  playAudio(card.audioIdx, btn);
+  playAudio(card.audioId, btn);
 }
 
 function toggleAutoPlay() {
@@ -1537,7 +1623,7 @@ function renderQuiz() {
     <div class="quiz-question">${item.korean}</div>
     <div class="quiz-options">
       ${options.map((opt, i) => `
-        <button class="quiz-opt" onclick="checkQuiz(this,'${escQ(opt)}','${escQ(item.english)}',${item.audioIdx||0})">${opt}</button>
+        <button class="quiz-opt" onclick="checkQuiz(this,'${escQ(opt)}','${escQ(item.english)}',${item.audioId||null})">${opt}</button>
       `).join('')}
     </div>
     <div class="quiz-feedback" id="quizFeedback"></div>
@@ -1575,7 +1661,7 @@ function checkQuiz(btn, chosen, correct, audioIdx) {
   }
   // 오디오 버튼 추가 + 자동재생
   if (audioIdx) {
-    fb.innerHTML += `<br><button class="audio-btn" id="quizAudioBtn" style="margin-top:8px" onclick="playAudio(${audioIdx}, this)">🔊 정답 듣기</button>`;
+    fb.innerHTML += `<br><button class="audio-btn" id="quizAudioBtn" style="margin-top:8px" onclick="playAudio('${audioIdx||''}', this)">🔊 정답 듣기</button>`;
     if (autoPlayEnabled) setTimeout(() => playAudio(audioIdx, document.getElementById('quizAudioBtn')), 400);
   }
   document.getElementById('quizNextBtn').style.display = 'inline-block';
@@ -1644,8 +1730,8 @@ function renderFill() {
     <div class="fill-sentence">${display}</div>
     ${hint ? `<div class="fill-hint">힌트: <em>${hint}</em></div>` : ''}
     <div class="fill-input-row">
-      <input class="fill-input" id="fillInput" type="text" placeholder="빈칸을 채워주세요" onkeydown="if(event.key==='Enter')checkFill('${escQ(blank)}',${item.audioIdx||0})">
-      <button class="ctrl-btn primary" onclick="checkFill('${escQ(blank)}',${item.audioIdx||0})">확인</button>
+      <input class="fill-input" id="fillInput" type="text" placeholder="빈칸을 채워주세요" onkeydown="if(event.key==='Enter')checkFill('${escQ(blank)}',${item.audioId||null})">
+      <button class="ctrl-btn primary" onclick="checkFill('${escQ(blank)}',${item.audioId||null})">확인</button>
     </div>
     <div class="fill-feedback" id="fillFeedback"></div>
     <div style="display:flex;gap:8px;margin-top:8px;">
@@ -1668,7 +1754,7 @@ function checkFill(correct, audioIdx) {
     fb.className = 'fill-feedback ok show';
     fb.innerHTML = '✅ 정답입니다! 훌륭해요 🎉';
     if (audioIdx) {
-      fb.innerHTML += ` <button class="audio-btn" id="fillAudioBtn" style="margin-top:8px" onclick="playAudio(${audioIdx},this)">🔊 듣기</button>`;
+      fb.innerHTML += ` <button class="audio-btn" id="fillAudioBtn" style="margin-top:8px" onclick="playAudio('${audioIdx||''}',this)">🔊 듣기</button>`;
       if (autoPlayEnabled) setTimeout(() => playAudio(audioIdx, document.getElementById('fillAudioBtn')), 400);
     }
     setTimeout(() => { fillIdx++; renderFill(); }, 1800);
@@ -1677,7 +1763,7 @@ function checkFill(correct, audioIdx) {
     fb.className = 'fill-feedback ng show';
     fb.innerHTML = `❌ 정답: <span class="correct-ans">${correct}</span>`;
     if (audioIdx) {
-      fb.innerHTML += ` <button class="audio-btn" id="fillAudioBtn" style="margin-top:8px" onclick="playAudio(${audioIdx},this)">🔊 정답 듣기</button>`;
+      fb.innerHTML += ` <button class="audio-btn" id="fillAudioBtn" style="margin-top:8px" onclick="playAudio('${audioIdx||''}',this)">🔊 정답 듣기</button>`;
     }
   }
 }
