@@ -1936,7 +1936,7 @@ function stopConvMic() {
   convRecognition = null;
 }
 
-
+async function sendMessage() {
   const input = document.getElementById('convInput');
   const text = input.value.trim();
   if (!text) return;
