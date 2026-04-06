@@ -577,6 +577,28 @@ body::after {
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
+.api-key-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.api-key-row.hidden { display: none; }
+.api-key-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+.api-key-input::placeholder { color: var(--text-dim); }
 .sugg-btn {
   padding: 6px 12px;
   background: var(--surface2);
@@ -750,6 +772,11 @@ body::after {
   <!-- CONVERSATION -->
   <div id="conv" class="section">
     <div class="conv-area">
+      <div class="api-key-row hidden" id="apiKeyRow">
+        <span>🔑</span>
+        <input type="password" id="apiKeyInput" class="api-key-input" placeholder="Anthropic API 키 입력 (sk-ant-...)">
+        <button class="ctrl-btn primary" onclick="saveApiKey()">저장</button>
+      </div>
       <div class="conv-situation" id="convSituation">
         <div class="conv-icon">💬</div>
         <div class="conv-situation-text">
@@ -1486,6 +1513,28 @@ function toggleAutoPlay() {
 }
 
 // ============================================================
+//  API KEY
+// ============================================================
+function getApiKey() {
+  return localStorage.getItem('anthropic_api_key') || '';
+}
+
+function saveApiKey() {
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if (!val) return;
+  localStorage.setItem('anthropic_api_key', val);
+  document.getElementById('apiKeyInput').value = '';
+  document.getElementById('apiKeyRow').classList.add('hidden');
+  showToast('🔑 API 키가 저장됐습니다');
+}
+
+function showApiKeyRow() {
+  const row = document.getElementById('apiKeyRow');
+  row.classList.remove('hidden');
+  document.getElementById('apiKeyInput').focus();
+}
+
+// ============================================================
 //  INIT
 // ============================================================
 function init() {
@@ -1877,13 +1926,25 @@ function useSuggestion(text) {
 
 async function startConv() {
   document.getElementById('convSuggestions').innerHTML = '';
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    showTyping(false);
+    showApiKeyRow();
+    showToast('⚠️ API 키를 먼저 입력해주세요');
+    return;
+  }
+
   showTyping(true);
-  const ep = EPISODES[currentEpIdx];
-  
+
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
@@ -1892,6 +1953,7 @@ async function startConv() {
       })
     });
     const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
     const text = data.content?.find(b => b.type === 'text')?.text || '';
     showTyping(false);
     addMessage('ai', text);
@@ -1899,7 +1961,13 @@ async function startConv() {
     convHistory.push({ role: 'assistant', content: text });
   } catch(e) {
     showTyping(false);
-    addMessage('ai', 'Hello! Let\'s practice English together. How are you today?\n(안녕하세요! 같이 영어 연습해봐요. 오늘 어떠세요?)');
+    if (e.message?.includes('auth') || e.message?.includes('API key')) {
+      localStorage.removeItem('anthropic_api_key');
+      showApiKeyRow();
+      showToast('⚠️ API 키가 올바르지 않습니다. 다시 입력해주세요');
+    } else {
+      addMessage('ai', 'Hello! Let\'s practice English together. How are you today?\n(안녕하세요! 같이 영어 연습해봐요. 오늘 어떠세요?)');
+    }
   }
 }
 
@@ -1978,13 +2046,27 @@ async function sendMessage() {
   document.getElementById('sendBtn').disabled = true;
   showTyping(true);
 
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    showTyping(false);
+    document.getElementById('sendBtn').disabled = false;
+    showApiKeyRow();
+    showToast('⚠️ API 키를 먼저 입력해주세요');
+    return;
+  }
+
   convHistory.push({ role: 'user', content: text });
 
   try {
     const messages = convHistory.filter(m => m.role !== 'system');
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
@@ -1993,13 +2075,20 @@ async function sendMessage() {
       })
     });
     const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
     const reply = data.content?.find(b => b.type === 'text')?.text || 'Sorry, try again!';
     convHistory.push({ role: 'assistant', content: reply });
     showTyping(false);
     addMessage('ai', reply);
   } catch(e) {
     showTyping(false);
-    addMessage('ai', 'Connection error. Please try again. (연결 오류입니다. 다시 시도해주세요.)');
+    if (e.message?.includes('auth') || e.message?.includes('API key')) {
+      localStorage.removeItem('anthropic_api_key');
+      showApiKeyRow();
+      showToast('⚠️ API 키가 올바르지 않습니다. 다시 입력해주세요');
+    } else {
+      addMessage('ai', 'Connection error. Please try again. (연결 오류입니다. 다시 시도해주세요.)');
+    }
   }
   document.getElementById('sendBtn').disabled = false;
 }
