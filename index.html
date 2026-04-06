@@ -1426,6 +1426,12 @@ let fillIdx = 0;
 
 // CONV STATE
 let convHistory = [];
+
+function getCurrentSentences() {
+  if (currentEpIdx === -1) return EPISODES.flatMap(ep => ep.sentences);
+  return EPISODES[currentEpIdx].sentences;
+}
+
 // ============================================================
 //  AUDIO ENGINE
 // ============================================================
@@ -1496,7 +1502,12 @@ function init() {
 
 function renderEpisodeList() {
   const list = document.getElementById('episodeList');
-  list.innerHTML = EPISODES.map((ep, i) => `
+  const totalSents = EPISODES.reduce((n, ep) => n + ep.sentences.length, 0);
+  const allItem = `<div class="ep-item ${currentEpIdx===-1?'active':''}" onclick="selectEpisode(-1)">
+      전체 (All)
+      <span class="ep-count">${totalSents}문장</span>
+    </div>`;
+  list.innerHTML = allItem + EPISODES.map((ep, i) => `
     <div class="ep-item ${i===currentEpIdx?'active':''}" onclick="selectEpisode(${i})">
       ${ep.title}
       <span class="ep-count">${ep.sentences.length}문장</span>
@@ -1506,9 +1517,13 @@ function renderEpisodeList() {
 
 function selectEpisode(idx) {
   currentEpIdx = idx;
-  const ep = EPISODES[idx];
-  if (!ep) { console.error('[빨모쌤] EPISODES[' + idx + '] 없음'); return; }
-  document.querySelector('.episode-badge').textContent = `📚 ${ep.title} ▾`;
+  if (idx === -1) {
+    document.querySelector('.episode-badge').textContent = `📚 전체 (All) ▾`;
+  } else {
+    const ep = EPISODES[idx];
+    if (!ep) { console.error('[빨모쌤] EPISODES[' + idx + '] 없음'); return; }
+    document.querySelector('.episode-badge').textContent = `📚 ${ep.title} ▾`;
+  }
   renderEpisodeList();
   toggleEpisodeSelector(true);
   initFlashcards();
@@ -1537,8 +1552,7 @@ function switchTab(id, btn) {
 //  FLASHCARD
 // ============================================================
 function initFlashcards() {
-  const ep = EPISODES[currentEpIdx];
-  fcCards = [...ep.sentences];
+  fcCards = [...getCurrentSentences()];
   fcIdx = 0;
   fcFlipped = false;
   renderFC();
@@ -1620,8 +1634,8 @@ function fcPrev() {
 //  QUIZ
 // ============================================================
 function startQuiz() {
-  const ep = EPISODES[currentEpIdx];
-  quizItems = [...ep.sentences].sort(() => Math.random() - 0.5).slice(0, Math.min(10, ep.sentences.length));
+  const sents = getCurrentSentences();
+  quizItems = [...sents].sort(() => Math.random() - 0.5).slice(0, Math.min(10, sents.length));
   quizIdx = 0;
   quizScore = 0;
   quizAnswered = false;
@@ -1640,8 +1654,7 @@ function renderQuiz() {
   quizAnswered = false;
 
   // Make 4 options: 1 correct + 3 wrong
-  const ep = EPISODES[currentEpIdx];
-  const allSents = ep.sentences.filter(s => s.english !== item.english);
+  const allSents = getCurrentSentences().filter(s => s.english !== item.english);
   const wrongs = allSents.sort(() => Math.random() - 0.5).slice(0, 3).map(s => s.english);
   const options = [...wrongs, item.english].sort(() => Math.random() - 0.5);
 
@@ -1717,8 +1730,7 @@ function showQuizResult() {
 //  FILL IN THE BLANK
 // ============================================================
 function initFill() {
-  const ep = EPISODES[currentEpIdx];
-  fillItems = [...ep.sentences].sort(() => Math.random() - 0.5);
+  fillItems = [...getCurrentSentences()].sort(() => Math.random() - 0.5);
   fillIdx = 0;
   renderFill();
 }
@@ -1799,22 +1811,40 @@ function checkFill(correct, audioIdx) {
 //  CONVERSATION
 // ============================================================
 function initConv() {
-  const ep = EPISODES[currentEpIdx];
   convHistory = [];
   document.getElementById('convMessages').innerHTML = '';
 
-  const situation = `이 에피소드의 핵심 표현은 "${ep.title}"입니다. 주제: ${ep.topic}. 
-  예문들: ${ep.sentences.slice(0,3).map(s => `"${s.english}"`).join(', ')}`;
+  let sysMsg;
+  if (currentEpIdx === -1) {
+    const allSents = getCurrentSentences();
+    document.getElementById('convSituation').innerHTML = `
+      <div class="conv-icon">💬</div>
+      <div class="conv-situation-text">
+        <strong>전체 에피소드 (All)</strong>
+        배운 모든 표현을 활용해 AI와 자유롭게 영어 대화를 연습해보세요.
+      </div>
+    `;
+    sysMsg = `You are a friendly English conversation partner helping a Korean learner practice English.
+The learner has studied these expressions: ${allSents.slice(0, 15).map(s => `"${s.english}" (${s.korean})`).join('; ')}
 
-  document.getElementById('convSituation').innerHTML = `
-    <div class="conv-icon">💬</div>
-    <div class="conv-situation-text">
-      <strong>현재 에피소드: ${ep.title}</strong>
-      AI와 이 표현을 활용한 영어 대화를 연습해보세요. 여러분의 영어를 코멘트해드립니다.
-    </div>
-  `;
+Rules:
+1. Start the conversation naturally in English with a relatable everyday scenario.
+2. After the user speaks, respond naturally and briefly comment on their English.
+3. Naturally weave in the studied expressions when relevant.
+4. Keep messages short and conversational.
+5. Add a Korean translation for your English in parentheses on a new line when needed.
 
-  const sysMsg = `You are a friendly English conversation partner helping a Korean learner practice English.
+Start now with a greeting and set up a scenario.`;
+  } else {
+    const ep = EPISODES[currentEpIdx];
+    document.getElementById('convSituation').innerHTML = `
+      <div class="conv-icon">💬</div>
+      <div class="conv-situation-text">
+        <strong>현재 에피소드: ${ep.title}</strong>
+        AI와 이 표현을 활용한 영어 대화를 연습해보세요. 여러분의 영어를 코멘트해드립니다.
+      </div>
+    `;
+    sysMsg = `You are a friendly English conversation partner helping a Korean learner practice English.
 The current episode is about: "${ep.title}"
 Key expressions to practice: ${ep.sentences.map(s => `"${s.english}" (${s.korean})`).join('; ')}
 
@@ -1827,6 +1857,7 @@ Rules:
 6. If they use the target expression correctly, praise it specifically.
 
 Start now with a greeting and set up a scenario.`;
+  }
 
   convHistory = [{ role: 'system', content: sysMsg }];
 
