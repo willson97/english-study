@@ -1880,7 +1880,7 @@ function renderQuiz() {
     <div class="quiz-question">${item.korean}</div>
     <div class="quiz-options">
       ${options.map((opt, i) => `
-        <button class="quiz-opt" onclick="checkQuiz(this,'${escQ(opt)}','${escQ(item.english)}',${item.audioId||null})">${opt}</button>
+        <button class="quiz-opt" onclick="checkQuiz(this,'${escQ(opt)}','${escQ(item.english)}','${item.audioId||''}')">${opt}</button>
       `).join('')}
     </div>
     <div class="quiz-feedback" id="quizFeedback"></div>
@@ -1986,8 +1986,8 @@ function renderFill() {
     <div class="fill-sentence">${display}</div>
     ${hint ? `<div class="fill-hint">힌트: <em>${hint}</em></div>` : ''}
     <div class="fill-input-row">
-      <input class="fill-input" id="fillInput" type="text" placeholder="빈칸을 채워주세요" onkeydown="if(event.key==='Enter')checkFill('${escQ(blank)}',${item.audioId||null})">
-      <button class="ctrl-btn primary" onclick="checkFill('${escQ(blank)}',${item.audioId||null})">확인</button>
+      <input class="fill-input" id="fillInput" type="text" placeholder="빈칸을 채워주세요" onkeydown="if(event.key==='Enter')checkFill('${escQ(blank)}','${item.audioId||''}')">
+      <button class="ctrl-btn primary" onclick="checkFill('${escQ(blank)}','${item.audioId||''}')">확인</button>
     </div>
     <div class="fill-feedback" id="fillFeedback"></div>
     <div style="display:flex;gap:8px;margin-top:8px;">
