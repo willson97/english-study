@@ -11,11 +11,11 @@
   python generate_audio.py --dry-run            # 생성 목록만 출력 (실제 생성 안 함)
 
 필요 패키지:
-  pip install openai
+  pip install google-cloud-texttospeech
 
 API 키 설정 (둘 중 하나):
-  export OPENAI_API_KEY="sk-..."
-  또는 스크립트 내 OPENAI_API_KEY 변수에 직접 입력
+  export GOOGLE_APPLICATION_CREDENTIALS="/path/to/service-account.json"
+  또는 스크립트 내 GOOGLE_CREDENTIALS_JSON 변수에 서비스 계정 JSON 경로 직접 입력
 """
 
 import os
@@ -25,12 +25,12 @@ import time
 import argparse
 
 # ── 설정 ──────────────────────────────────────────────────────
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")  # 환경변수 또는 직접 입력
+GOOGLE_CREDENTIALS_JSON = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")  # 서비스 계정 JSON 경로
 TXT_FILE       = "ppalmmo_live_for_now.txt"             # 파싱할 txt 파일 경로
 AUDIO_DIR      = "audio"                                # 출력 폴더
 AUDIO_PREFIX   = "ppalmmo_live_"                        # 파일명 접두사
-TTS_MODEL      = "tts-1"                                # tts-1 (빠름) / tts-1-hd (고품질)
-TTS_VOICE      = "alloy"                                # alloy / echo / fable / onyx / nova / shimmer
+TTS_LANGUAGE   = "en-US"                                # 언어 코드
+TTS_VOICE      = "en-US-Journey-D"                      # 보이스 이름 (Journey-D: 남성, Journey-F: 여성)
 TTS_SPEED      = 0.9                                    # 재생 속도 (0.25 ~ 4.0), 학습용은 0.85~0.95 권장
 # ─────────────────────────────────────────────────────────────
 
@@ -77,20 +77,32 @@ def parse_sentences(txt_path):
     return sentences
 
 
-def generate_mp3(client, text, out_path, speed=0.9, voice="alloy"):
-    """OpenAI TTS API로 mp3 생성"""
-    response = client.audio.speech.create(
-        model=TTS_MODEL,
-        voice=voice,
-        input=text,
-        speed=speed,
-        response_format="mp3",
+def generate_mp3(client, text, out_path, speed=0.9, voice="en-US-Journey-D", language="en-US"):
+    """Google Cloud TTS API로 mp3 생성"""
+    from google.cloud import texttospeech
+
+    synthesis_input = texttospeech.SynthesisInput(text=text)
+    voice_params = texttospeech.VoiceSelectionParams(
+        language_code=language,
+        name=voice,
     )
-    response.stream_to_file(out_path)
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3,
+        speaking_rate=speed,
+    )
+
+    response = client.synthesize_speech(
+        input=synthesis_input,
+        voice=voice_params,
+        audio_config=audio_config,
+    )
+
+    with open(out_path, "wb") as f:
+        f.write(response.audio_content)
 
 
 def main():
-    parser = argparse.ArgumentParser(description='빨모쌤 TTS 생성기')
+    parser = argparse.ArgumentParser(description='빨모쌤 TTS 생성기 (Google Cloud)')
     parser.add_argument('--force',   action='store_true', help='이미 있는 파일도 재생성')
     parser.add_argument('--from',       dest='from_idx',   type=int, default=1,    help='시작 순번 (기본값: 1)')
     parser.add_argument('--file-start', dest='file_start', type=int, default=None, help='파일 번호 시작값 (기본값: --from 값과 동일). 기존 파일과 번호 충돌 시 사용')
@@ -98,13 +110,10 @@ def main():
     parser.add_argument('--txt',     default=TXT_FILE, help=f'txt 파일 경로 (기본값: {TXT_FILE})')
     args = parser.parse_args()
 
-    # API 키 확인
-    api_key = OPENAI_API_KEY
-    if not api_key:
-        print("❌ OPENAI_API_KEY가 설정되지 않았습니다.")
-        print("   export OPENAI_API_KEY='sk-...' 를 실행하거나")
-        print("   스크립트 상단 OPENAI_API_KEY 변수에 직접 입력하세요.")
-        sys.exit(1)
+    # 인증 확인
+    creds = GOOGLE_CREDENTIALS_JSON
+    if creds:
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = creds
 
     # txt 파일 파싱
     if not os.path.exists(args.txt):
@@ -134,7 +143,7 @@ def main():
         return
 
     print(f"🎙️  생성 대상: {len(targets)}개 파일")
-    print(f"   목소리: {TTS_VOICE} / 속도: {TTS_SPEED} / 모델: {TTS_MODEL}")
+    print(f"   목소리: {TTS_VOICE} / 속도: {TTS_SPEED} / 언어: {TTS_LANGUAGE}")
     print()
 
     if args.dry_run:
@@ -143,12 +152,17 @@ def main():
         print(f"\n총 {len(targets)}개 파일이 생성될 예정입니다. (--dry-run: 실제 생성 안 함)")
         return
 
-    # OpenAI 클라이언트 초기화
+    # Google Cloud TTS 클라이언트 초기화
     try:
-        from openai import OpenAI
-        client = OpenAI(api_key=api_key)
+        from google.cloud import texttospeech
+        client = texttospeech.TextToSpeechClient()
     except ImportError:
-        print("❌ openai 패키지가 없습니다. pip install openai 를 실행하세요.")
+        print("❌ google-cloud-texttospeech 패키지가 없습니다.")
+        print("   pip install google-cloud-texttospeech 를 실행하세요.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ Google Cloud 인증 실패: {e}")
+        print("   GOOGLE_APPLICATION_CREDENTIALS 환경변수에 서비스 계정 JSON 경로를 설정하세요.")
         sys.exit(1)
 
     # 생성 실행
@@ -158,11 +172,11 @@ def main():
     for s, out_path in targets:
         try:
             print(f"  [{s['idx']:03d}] 생성 중... \"{s['english'][:55]}\"", end='', flush=True)
-            generate_mp3(client, s['english'], out_path, speed=TTS_SPEED, voice=TTS_VOICE)
+            generate_mp3(client, s['english'], out_path, speed=TTS_SPEED, voice=TTS_VOICE, language=TTS_LANGUAGE)
             size_kb = os.path.getsize(out_path) // 1024
             print(f" → {size_kb}KB ✅")
             success += 1
-            time.sleep(0.1)  # API 레이트 리밋 방지
+            time.sleep(0.5)  # API 레이트 리밋 방지
         except Exception as e:
             print(f" ❌ 오류: {e}")
             failed.append((s['idx'], str(e)))
