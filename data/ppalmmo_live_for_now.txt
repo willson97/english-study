@@ -1,7 +1,7 @@
 출처: 빨모쌤
 id: ppalmmo_live
 
-Episode: For now
+Episode: 01. Let's use this For now. 일단은 이거 쓰자.
 주제: 일상
 
 일단은 그냥 이거 쓰자.
@@ -71,7 +71,8 @@ There's been a slight delay, so it looks like we're going to have to make do wit
 * make do with: ~로 때우다, ~로 임시변통하다
 * for the time being: 당분간은
 
-Episode: For the most part
+Episode: 02. I enjoyed it for the most part. 난 대체로 재미있었어.
+주제: 일상
 
 난 그 영화 대체적으로 재미있게 봤어.
 I enjoyed the movie for the most part.
@@ -161,7 +162,7 @@ Well, for the most part, it was a complete diaster. But I actually learned a few
 * give someone second thoughts: ~에 대해 다시 생각해보게 하다
 }
 
-Episode: For a beginner
+Episode: 03. You'r good for a beginner. 초보자치고는 잘하네.
 주제: 일상
 
 초보자치고는 꽤 잘하네.
@@ -257,7 +258,7 @@ For a TV show that is only in its first season, it has already been gaining a lo
 For someone who has just lost his job, you're in a surprisingly good mood.
 * surprisingly: 의외로
 
-Episode: It's not like I do that every day.
+Episode: 04. It's not like I do that every day. 내가 매일 그러는 건 아니잖아.
 주제: 일상
 
 아, 좀. 내가 매일 그러는 것도 아닌데.
@@ -333,7 +334,7 @@ Why are you so nervous? It's not like they're interviewing you. Besides, you've 
 * Besides: 게다가
 * be yourself: 너답게 행동하다
 
-Episode: Otherwise, it's in really good condition.
+Episode: 05. Otherwise, it's in really good condition. 그것만 빼면, 상태는 정말 좋아.
 주제: 일상
 
 새로 칠만 해주면 좋겠네요. 그것 말고는 아주 훌륭한 상태예요.
@@ -396,7 +397,7 @@ She claims she had no knowledge of that, but all of her actions suggest otherwis
 일반적으로 더 높은 수준의 교육이 더 나은 삶으로 이어진다고 말하지만, 꼭 그런 건 아니라고 말해주는 실제 사례들도 많이 있어요.
 Generally speaking, higher education leads to a better quality of life, but there are plenty of real life cases that suggest otherwise.
 
-Episode: Does any body want me to go over the rules again? 규칙을 다시 알려줬으면 하는 분 있나요?
+Episode: 06. Does any body want me to go over the rules again? 규칙을 다시 알려줬으면 하는 분 있나요?
 주제: 일상
 
 게임을 시작하기 전에 규칙을 한 번 더 알려드렸으면 하는 분 있나요?
@@ -466,7 +467,7 @@ She will need some hands-on experience before we put her to any real work, but s
 * hands-on experience: 실질적인 경험
 * go over: 어떤 과정 등을 누구에게 가르칠 목적으로 보여주다
 
-Episode: I'll make sure everyone knows. 모두에게 확실하게 전하게. 
+Episode: 07. I'll make sure everyone knows. 모두에게 확실하게 전할게.
 주제: 일상
 
 제출하기 전에 다시 한번 꼭 검토하세요.
@@ -557,3 +558,163 @@ Are you sure you put in the correct address?
 Yeah. I made sure of it. I checked and double checked.
 * I checked and double checked
 }
+
+Episode: 08. We can't keep up with all the changes. 모든 변화를 다 따라갈 수는 없어.
+주제: 일상
+
+모든 변화를 다 따라갈 수는 없어.
+We can't keep up with all the changes.
+* keep up with: 따라가다, 보조를 맞추다
+
+다른 애들을 못 따라가겠더라.
+I couldn't keep up with the rest of the class.
+* keep up with: 따라가다, 보조를 맞추다
+* the rest of the class: 나머지 학생들
+
+그들은 경쟁사들에게 뒤처지지 않으려고 애쓰고 있어요.
+They're struggling to keep up with their competitiors.
+* struggle to: ~하려고 애쓰다, ~하느라 고생하다
+* keep up with: 따라가다, 보조를 맞추다
+
+{
+요즘 인공지능 관련해서 뭐 새로운 거 있나?
+So, what's new in AI?
+
+나도 최근 소식까지는 파악하고 있지는 않은데 별로 없는 것 같아.
+I haven't really been keeping up with the latest, but not a whole lot I think.
+* have not been ~ing: ~하지 않았다 (과거부터 현재까지)
+* keep up with: 파악하고 있다
+* not a whole lot:
+
+어쩌면 그게 좋을 일일 수도 있겠다. 개발 속도를 늦춰야 한다고 사람들이 그러던데.
+Maybe that's a good things. I remember people saying that they need to slow down the developement.
+* slow down: 늦추다
+
+지금도 글허게 말하고 있는데 내 생각에는 그냥 오버하는 것 같아. 아마 예전 Y2K 사건처럼 될 것 같아.
+They're still saying that, but I think people are just overracting .It's probably going to be like the Y2K scare back in the day.
+* overreact: 과민반응하다
+* be like: ~와 같을 것이다
+* Y2K scare: Y2K 사태
+* back in the day: 옛날에
+}
+
+내가 늙었나 봐. 사람들이 쓰는 은어(슬램)을 못 따라가겠어.
+I must be getting old. I can't keep up with all the slang that people are using.
+* getting old:
+* keep up with: 따라가다, 보조를 맞추다
+* slang: 속어, 은어
+
+나도 이러는 게 자랑스럽지는 않지만 경쟁자들을 상대로 뒤쳐지지 않으려면 달리 어떤 방법이 있겠어?
+I'm not proud of this either, but how else are we going to keep up with our competitors?
+* proud of this either: 
+* how else: 달리 어떤 방법으로
+* keep up with: 뒤쳐지지 않다
+
+대화를 따라가기가 좀 힘들긴 했어도 너무 즐거웠어요.
+I had a little hard time keeping up with the conversation, but I really enjoyed it nonetheless.
+* keep up with: 따라가다, 보조를 맞추다
+* nonetheless: 그럼에도 불구하고, 그렇기는 하지만
+
+요즘 일 때문에 바빠서 좋아하는 TV 프로그램도 제때 못 봐.
+I'm so busy with work these days that I can't even keep up with my favorite shows.
+* keep up with: 따라가다, 보조를 맞추다
+
+거의 다 왔어. 뒤쳐지지 말고 잘 따라와.
+We're almost there. Try to keep up.
+* keep up: 따라가다, 보조를 맞추다 (대상이 없을 때는 ~with 생략)
+
+잘하고 있어./계속 그렇게 거야
+keep up the great work.
+* keep up: 따라가다, 보조를 맞추다 (대상이 없을 때는 ~with 생략)
+
+우리 일이 많이 밀렸어. (직역: 따라잡아야 할 일이 많다.)
+We have a lot of work to catch up on.
+* catch up on: 따라잡다
+
+회의 내용은 전부 녹음되니까, 놓친 건 나중에 얼마든지 따라 잡을 수 있어요.
+The meetings are entirely recorded, so you can catch up on anything you might've missed.
+* catch up on: 따라잡다
+
+자, 어서 가자. 다른 사람들을 따라잡아야 해.
+Come on. Let's get moving. We have to catch up with the others.
+* catch up with: 따라잡다
+
+거기 상황이 좀 안 좋아 보여요. 경쟁사들한테 많이 뒤쳐져 있어요.
+Things are not looking good for them. They have fallen far behind their competitors.
+* fall behind: 뒤쳐지다
+
+한번 뒤쳐지면 따라잡기 정말 힘드니까 어떻게든 따라가도록 해.
+Once you fall behind, it's really hard to catch up. So, do whatever you can to keep up.
+* catch up: 따라잡다
+* keep up: 따라가다, 보조를 맞추다
+
+Episode: 09. This app keeps track of your location. 이 앱은 너의 위치를 추적해줘.
+주제: 일상
+
+이 앱은 너의 위치를 추적해줘.
+This app keeps track of your location.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+매일 너의 지출에 대해 파알하고 있어야 해.
+You have to keep track of your expenses every day.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+모든 것을 기억만으로 다 파악할 수는 없어.
+You can't keep track of everything just by memory.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+{
+제가 요청한 대로 뭘 먹고 있는지 파악하고 있는 거죠?
+Are you keeping track of everything you're eating like I asked you?
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+네, 어쩌면 한두 끼니는 놓쳤을 수도 있는데 최선을 다하고 있어요. 여기요. 제 핸드폰에 다 있어요.
+Yes, I may have lost track of one or two meals, but I'v been doing my best. Here. I have it all on my phone.
+* lose track of: ~을 놓치다, ~을 파악하지 못하다
+
+이게 나중에 중요한 데이터가 될 거예요. 섭취하는 모든 음식과 음료를 일일이 파악하고 있어야 해요.
+This will be valuable data later on. Make sure you keep track of every single thing you eat and drink.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+* make sure:
+}
+
+이 앱은 모든 암호를 안전하게 저장해주는 기능이 정말 뛰어나.
+This app does a really good job of keeping track of all your passwords safely.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+너의 시청 패턴을 파악하고 그걸 토대로 추천해 줘.
+It keeps track of your viewing pattern and gives you recommendations based on that.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+정리를 잘 안 하면, 뭐가 뭔지 파악하기 정말 어려워질 거야.
+If you're not organized, it's going to get really difficult to keep track of everything.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+아무런 전자기기 없이 자신의 위치와 이동 경로를 파악하는 것 같은 아주 기본적인 생존 기술들을 몇 가지 배웠어요.
+We learned some very basic survival techniques like how to keep track of your location and movement without any electronic devices.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+
+보통 학교에서는 부모에게 자녀가 학교에서 어떻게 지내고 있는지를 잘 파악하고 있으라고 권고하는데, 그러기 위한 가장 좋은 방법은 선생님들과 꾸준히 소통하는 거예요.
+Schools usually advise parents to keep track of how their children are doing in school and the best way to do that is to be in frequent touch with their teachers.
+* keep track of: ~을 추적하다, ~을 계속 주시하다
+* be in frequent touch with: ~와 꾸준히 소통하다
+
+미안, 시간이 벌써 이렇게 된 줄 몰랐어.
+Sorry, I lost track of times.
+* lose track of:
+
+어느 순간, 내가 왜 그렇게 하고 있었는지를 모르겠더라고.
+At some point, I just kind of lost track of why I was doing it.
+* lose track of: 
+
+그 운송업체는 모든 물품의 위치를 아주 상세하기 추적해. 웹사이트에 가면 시간대별로 업데이트를 확인할 수 있어.
+The carrier keeps a very detailed track of the location of all their packages. You can get an hourly update on their website.
+* keeps a very detailed track of:
+
+자기 물건 잘들 챙기세요. 여기서 사람들이 물건 분실을 수시로 해요.
+Keep good track of your things everybody. We constantly have people losing their belongings here.
+* keep good track of:
+
+이번에는 운이 좋아서 몇 개만 잃어버렸지만, 앞으로는 장비 관리를 더 잘해야 돼.
+We're luckly we only lost a few this time. We need to start keeping better track of our equipment from now on.
+* keep better track of:
