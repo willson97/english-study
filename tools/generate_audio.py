@@ -92,7 +92,8 @@ def generate_mp3(client, text, out_path, speed=0.9, voice="alloy"):
 def main():
     parser = argparse.ArgumentParser(description='빨모쌤 TTS 생성기')
     parser.add_argument('--force',   action='store_true', help='이미 있는 파일도 재생성')
-    parser.add_argument('--from',    dest='from_idx', type=int, default=1, help='시작 순번 (기본값: 1)')
+    parser.add_argument('--from',       dest='from_idx',   type=int, default=1,    help='시작 순번 (기본값: 1)')
+    parser.add_argument('--file-start', dest='file_start', type=int, default=None, help='파일 번호 시작값 (기본값: --from 값과 동일). 기존 파일과 번호 충돌 시 사용')
     parser.add_argument('--dry-run', action='store_true', help='생성 목록만 출력')
     parser.add_argument('--txt',     default=TXT_FILE, help=f'txt 파일 경로 (기본값: {TXT_FILE})')
     args = parser.parse_args()
@@ -117,11 +118,13 @@ def main():
     os.makedirs(AUDIO_DIR, exist_ok=True)
 
     # 생성 대상 필터링
+    file_start = args.file_start if args.file_start is not None else args.from_idx
     targets = []
     for s in sentences:
         if s['idx'] < args.from_idx:
             continue
-        out_path = os.path.join(AUDIO_DIR, f"{AUDIO_PREFIX}{s['idx']:03d}.mp3")
+        file_idx = file_start + (s['idx'] - args.from_idx)
+        out_path = os.path.join(AUDIO_DIR, f"{AUDIO_PREFIX}{file_idx:03d}.mp3")
         if not args.force and os.path.exists(out_path):
             continue  # 이미 존재 → 스킵
         targets.append((s, out_path))
