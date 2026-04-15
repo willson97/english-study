@@ -38,7 +38,7 @@ This isn't a long-term solution, but for now, it's the best we've got. [ep01_009
 * for now:
 
 더 확실해질 때까지 일단은 우리만 알고 있자.
-Fow now, let's just keep this between us until we have more certainty. [ep01_010]
+For now, let's just keep this between us until we have more certainty. [ep01_010]
 * for now:
 
 회사에 일이 생겨서 일단은 여행 계획을 보류해야 되겠어.
@@ -101,7 +101,7 @@ It was OK for the most part. It's not that different from the one that came out 
 * for the most part:
 
 전편이 있는 줄 몰랐는네.
-I didn't realized there was a prequel. [ep02_008]
+I didn't realize there was a prequel. [ep02_008]
 * prequel: 전편
 
 아, 이건 후속편이라기보다는 리부트에 더 가깝겠다.
@@ -146,7 +146,7 @@ Not entirely, but for the most part, yes. [ep02_017]
 
 {
 누나랑은 사이 좋아요?
-Are you closed with your sister? [ep02_018]
+Are you close with your sister? [ep02_018]
 
 대체적으로는 그런 것 같아요. 자주 다투기는 하지만 남매들은 원래 다 그렇지 않나요?
 I'd say we are for the most part.  We do argue a lot, but all brothers and sisters do that, right? [ep02_019]
@@ -157,7 +157,7 @@ I'd say we are for the most part.  We do argue a lot, but all brothers and siste
 How did the interview go? [ep02_020]
 
 뭐, 완전  망한 거나 다름없어. 그렇지만 그 회사에 대해 몇 가지 새로 알게 된 사실이 있는데, 거기서 일하는 것데 대해 다시 생각해보게 되더라.
-Well, for the most part, it was a complete diaster. But I actually learned a few things about the company that gave me second thoughts about working there. [ep02_021]
+Well, for the most part, it was a complete disaster. But I actually learned a few things about the company that gave me second thoughts about working there. [ep02_021]
 * for the most part: 대체적으로, 대부분
 * give someone second thoughts: ~에 대해 다시 생각해보게 하다
 }
@@ -166,11 +166,11 @@ Episode: 03. You'r good for a beginner. 초보자치고는 잘하네.
 주제: 일상
 
 초보자치고는 꽤 잘하네.
-You're pretty good for a begineer. [ep03_001]
+You're pretty good for a beginner. [ep03_001]
 * for a beginner: 초보자치고는
 
 그녀는 나이에 비해 진짜 젊어 보여.
-She looks really good for he age. [ep03_002]
+She looks really good for her age. [ep03_002]
 * for her age:
 
  평일치고는 사람이 꽤 많았어.
@@ -186,7 +186,7 @@ Where did you find her? [ep03_004]
 In a parking lot. She was hiding under a car. How does she look? [ep03_005]
 
 음, 유기견치고는 상태가 꽤 좋은 것 같아요. 4개월 정도 된 것으로 추정되네요.
-Well, for a stray, she looks to be in fairly good condition. I'd put hre somewhere around 4 months old. [ep03_006]
+Well, for a stray, she looks to be in fairly good condition. I'd put her somewhere around 4 months old. [ep03_006]
 * for a stray: 유기견치고는
 * put someone somewhere: ~정도로 추정하다
 
@@ -301,19 +301,19 @@ I think It's too fast. It's not like we know each other that well. [ep04_008]
 * know each other that well: 서로를 그렇게 잘 알다
 
 신경 쓰지 마. 법을 어긴 것도 아닌데 뭘. 게다가 그들이 널 알잖아. 분명 이해해줄 거야.
-Don't worry about it. It's no like you broke the law. Plus, they know you. I'm sure they'll understand. [ep04_009]
+Don't worry about it. It's not like you broke the law. Plus, they know you. I'm sure they'll understand. [ep04_009]
 * It's not like: ~인 건 아니잖아
 * broke the law: 법을 어기다
 * Plus: 게다가
 * I'm sure: 분명 ~일 거야
 
 걔 좀 봐줘. 과의도 아니었는데. 게다가 벌써 두 번이나 너한테 사과하지 않았어?
-Don't be so hard on him. It's not like it was on purpose. And he already apologized to you twice, did't he? [ep04_010]
+Don't be so hard on him. It's not like it was on purpose. And he already apologized to you twice, didn't he? [ep04_010]
 * Don't be so hard on someone: ~를 너무 심하게 대하지 마, ~를 좀 봐줘
 * on purpose: 고의로, 일부러
 
 이건 너한테 너무 좋은 기회야. 앨러 걱정을 하고 있을 때가 아니라고. 둘이 결혼한 사이도 아니잖아.
-this is a great opportunity for you. You shoudn't be worried about Allan. It's not like the two of you are married. [ep04_011]
+this is a great opportunity for you. You shouldn't be worried about Allan. It's not like the two of you are married. [ep04_011]
 * It's not like: ~인 건 아니잖아
 * the two of you:
 
@@ -368,7 +368,7 @@ I know. And can I be real honest with you? I'm actually psyched I got injured. W
 Remember to save your work frequently, otherwise you can lose hours of precious work. [ep05_007]
 
 일찍 출발해야 했어. 안 그랬으면 제시간에 도착 못 했을 거야.
-We had to leave early. Othewise, we wouldn't have made it on time. [ep05_008]
+We had to leave early. Otherwise, we wouldn't have made it on time. [ep05_008]
 * make it on time: 제시간에 도착하다
 
 실종된 아이는 며칠 뒤에 발견됐는데 가변운 영양실조 증상 외에는 부상도 없이 꽤 건강한 상태였어요.
@@ -378,7 +378,7 @@ The missing child was found several days later slightly malnourished, but otherw
 * fairly good health: 꽤 건강한 상태
 
 조사관들은 그냥 아주 안타까운 사고였던 것으로 결론을 냈지만, 아직 많은 사람들이 다르게 믿고 있어요.
-Investigators have concluded that it was just a very unforunate accident. But, there is still a large number of people who believe otherwise. [ep05_010]
+Investigators have concluded that it was just a very unfortunate accident. But, there is still a large number of people who believe otherwise. [ep05_010]
 * otherwise: 다른 식으로, 그렇지 않게
 
 완벽할 수도 있었던 저녁을 날씨가 완전히 망쳤어.
@@ -429,12 +429,12 @@ It's not about that. We're all part of a team. If something like this comes up, 
 }
 
 넘겨 드리기 전에 마지막으로 한 번 검토해도 될까요? 틀린 것이 없는지 확실하게 하고 싶어서요.
-Can I go over it on last time before I hand it over? I just want to make sure everything is right. [ep06_006]
+Can I go over it one last time before I hand it over? I just want to make sure everything is right. [ep06_006]
 * go over: 검토하다, 복습하다, 다시 훑어보다
 * hand it over: 넘겨주다
 
 문서를 자세히 몇 번 훝어봤지만, 내가 뭔가를 놓쳤을 가능성은 언제나 잇지.
-I carefully went over the document a couple of times, but there's always a change I missed something. [ep06_007]
+I carefully went over the document a couple of times, but there's always a chance I missed something. [ep06_007]
 * go over: 검토하다, 복습하다, 다시 훑어보다
 
 시작하기 전에 먼저 몇 가지 확인해야 할 것들이 있어요.
@@ -449,7 +449,7 @@ We'd better go over our story a few more times just in case. He's like a human l
 * smell a lie from a mile away: 멀리서도 거짓말을 귀신같이 알아채다 (직역: 백만 리 밖에서도 거짓말 냄새를 맡다)
 
 그 책에서 그녀는 그 사건에 대한 매우 흥미로운 세부 내용들을 많이 다룬다.
-In her book, she goes over a lot of very interesting details about.the incident. [ep06_010]
+In her book, she goes over a lot of very interesting details about the incident. [ep06_010]
 * go over: 다루다, 언급하다
 ** '다루다'라는 의미의 go over는 cover나 address로 대체할 수 있음
 
@@ -537,7 +537,7 @@ We need to make sure not to allow something like this to happen again. [ep07_015
 * allow
 
 아이들 앞에서는 절대로 그것에 대해서 얘기하지 않도록 하세요. 그들에게 많은 혼란과 불안감을 줄 수 있어요.
-Make sure never to talk about it in front of you kids. It can cause a lot of confusion and anxiety. [ep07_016]
+Make sure never to talk about it in front of the kids. It can cause a lot of confusion and anxiety. [ep07_016]
 * make sure never to: make sure not to 보다 강조된 표현
 * confusion
 * anxiety: 불안감
@@ -572,7 +572,7 @@ I couldn't keep up with the rest of the class. [ep08_002]
 * the rest of the class: 나머지 학생들
 
 그들은 경쟁사들에게 뒤처지지 않으려고 애쓰고 있어요.
-They're struggling to keep up with their competitiors. [ep08_003]
+They're struggling to keep up with their competitors. [ep08_003]
 * struggle to: ~하려고 애쓰다, ~하느라 고생하다
 * keep up with: 따라가다, 보조를 맞추다
 
@@ -587,11 +587,11 @@ I haven't really been keeping up with the latest, but not a whole lot I think. [
 * not a whole lot:
 
 어쩌면 그게 좋을 일일 수도 있겠다. 개발 속도를 늦춰야 한다고 사람들이 그러던데.
-Maybe that's a good things. I remember people saying that they need to slow down the developement. [ep08_006]
+Maybe that's a good thing. I remember people saying that they need to slow down the development. [ep08_006]
 * slow down: 늦추다
 
 지금도 글허게 말하고 있는데 내 생각에는 그냥 오버하는 것 같아. 아마 예전 Y2K 사건처럼 될 것 같아.
-They're still saying that, but I think people are just overracting .It's probably going to be like the Y2K scare back in the day. [ep08_007]
+They're still saying that, but I think people are just overreacting. It's probably going to be like the Y2K scare back in the day. [ep08_007]
 * overreact: 과민반응하다
 * be like: ~와 같을 것이다
 * Y2K scare: Y2K 사태
@@ -669,7 +669,7 @@ Are you keeping track of everything you're eating like I asked you? [ep09_004]
 * keep track of: ~을 추적하다, ~을 계속 주시하다
 
 네, 어쩌면 한두 끼니는 놓쳤을 수도 있는데 최선을 다하고 있어요. 여기요. 제 핸드폰에 다 있어요.
-Yes, I may have lost track of one or two meals, but I'v been doing my best. Here. I have it all on my phone. [ep09_005]
+Yes, I may have lost track of one or two meals, but I've been doing my best. Here. I have it all on my phone. [ep09_005]
 * lose track of: ~을 놓치다, ~을 파악하지 못하다
 
 이게 나중에 중요한 데이터가 될 거예요. 섭취하는 모든 음식과 음료를 일일이 파악하고 있어야 해요.
@@ -700,7 +700,7 @@ Schools usually advise parents to keep track of how their children are doing in 
 * be in frequent touch with: ~와 꾸준히 소통하다
 
 미안, 시간이 벌써 이렇게 된 줄 몰랐어.
-Sorry, I lost track of times. [ep09_012]
+Sorry, I lost track of time. [ep09_012]
 * lose track of:
 
 어느 순간, 내가 왜 그렇게 하고 있었는지를 모르겠더라고.
@@ -716,14 +716,14 @@ Keep good track of your things everybody. We constantly have people losing their
 * keep good track of:
 
 이번에는 운이 좋아서 몇 개만 잃어버렸지만, 앞으로는 장비 관리를 더 잘해야 돼.
-We're luckly we only lost a few this time. We need to start keeping better track of our equipment from now on. [ep09_016]
+We're lucky we only lost a few this time. We need to start keeping better track of our equipment from now on. [ep09_016]
 * keep better track of:
 
 Episode: 10. It's not about money. 중요한 건 돈이 아니야.
 주제: 일상
 
 중요한 것은 돈이 아니라 메시지를 전하는 것이다.
-It's not about money. It's about sending a messge. [ep10_001]
+It's not about money. It's about sending a message. [ep10_001]
 * it's not about:
 
 중요한 것은 완벽하게 하는 게 아니라 발전하는 거야.
@@ -755,7 +755,7 @@ When it comes to sleep, it's not about quantity, it's about quality. [ep10_008]
 * it's not about:
 
 어떤 방법을 활용하는지가 중요한 게 아니야. 포기하지 않는 끈기가 중요한 거야.
-It's not about what matter you use. It's about the being persistent. [ep10_009]
+It's not about what method you use. It's about being persistent. [ep10_009]
 * it's not about:
 * persistent: 끈기 있는, 끈질긴
 
@@ -775,7 +775,7 @@ I really hate the way ads are done nowadays. It's no longer about how well they 
 * get to (do): ~할 기회를 얻다
 
 가장 중요한 것은 새로운 환경에 얼마나 잘 적응할 수 있느냐야.
-It's all about how well you can adapt to a new environments. [ep10_013]
+It's all about how well you can adapt to a new environment. [ep10_013]
 * It's all about:
 
 그 여자가 예쁘다는 것은 아는데 그게 중요한 게 아니잖아.
