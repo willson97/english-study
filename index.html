@@ -69,6 +69,7 @@ body::after {
   letter-spacing: -0.5px;
 }
 .logo span { color: var(--text-muted); font-size: 13px; font-family: 'Noto Sans KR', sans-serif; margin-left: 10px; font-weight: 300; }
+.revision { color: var(--text-dim); font-size: 11px; font-family: 'JetBrains Mono', monospace; margin-left: 10px; }
 
 .episode-badge {
   background: var(--surface2);
@@ -99,6 +100,13 @@ body::after {
   padding: 28px;
   width: 380px;
   max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+#episodeList {
+  overflow-y: auto;
+  flex: 1;
 }
 .episode-panel h3 {
   font-size: 16px; font-weight: 500; margin-bottom: 16px;
@@ -687,7 +695,7 @@ body::after {
 <body>
 
 <header class="header">
-  <div class="logo">빨모쌤 <span>English Lab</span></div>
+  <div class="logo">빨모쌤 <span>English Lab</span><span class="revision">rev.2026.04.15</span></div>
   <button class="episode-badge" onclick="toggleEpisodeSelector()">📚 에피소드 선택 ▾</button>
 </header>
 
