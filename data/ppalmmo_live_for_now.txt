@@ -371,7 +371,7 @@ Remember to save your work frequently, otherwise you can lose hours of precious 
 We had to leave early. Otherwise, we wouldn't have made it on time. [ep05_008]
 * make it on time: 제시간에 도착하다
 
-실종된 아이는 며칠 뒤에 발견됐는데 가변운 영양실조 증상 외에는 부상도 없이 꽤 건강한 상태였어요.
+실종된 아이는 며칠 뒤에 발견됐는데 가벼운 영양실조 증상 외에는 부상도 없이 꽤 건강한 상태였어요.
 The missing child was found several days later slightly malnourished, but otherwise, unhurt and in fairly good health. [ep05_009]
 * slightly malnourished: 가벼운 영양실조
 * unhurt: 부상당하지 않은
@@ -598,7 +598,7 @@ They're still saying that, but I think people are just overreacting. It's probab
 * back in the day: 옛날에
 }
 
-내가 늙었나 봐. 사람들이 쓰는 은어(슬램)을 못 따라가겠어.
+내가 늙었나 봐. 사람들이 쓰는 은어(슬랭)을 못 따라가겠어.
 I must be getting old. I can't keep up with all the slang that people are using. [ep08_008]
 * getting old:
 * keep up with: 따라가다, 보조를 맞추다
@@ -655,7 +655,7 @@ Episode: 09. This app keeps track of your location. 이 앱은 너의 위치를 
 This app keeps track of your location. [ep09_001]
 * keep track of: ~을 추적하다, ~을 계속 주시하다
 
-매일 너의 지출에 대해 파알하고 있어야 해.
+매일 너의 지출에 대해 파악하고 있어야 해.
 You have to keep track of your expenses every day. [ep09_002]
 * keep track of: ~을 추적하다, ~을 계속 주시하다
 
@@ -749,7 +749,7 @@ Yeah, I remember. It's about making a strong first impression. [ep10_006]
 Excellent. They're going to love you. Now go. [ep10_007]
 }
 
-잠은 말이야, 양이 종요한 게 아니라 질이 중요한 거야.
+잠은 말이야, 양이 중요한 게 아니라 질이 중요한 거야.
 When it comes to sleep, it's not about quantity, it's about quality. [ep10_008]
 * When it comes to: ~에 관해서라면
 * it's not about:
