@@ -791,7 +791,7 @@ body::after {
           </div>
         </div>
       </div>
-      <div class="card-controls" id="fcControls" style="display:none">
+      <div class="card-controls" id="fcControls" style="visibility:hidden">
         <button class="ctrl-btn danger" onclick="fcFeedback(false)">😓 다시 볼게요</button>
         <button class="ctrl-btn success-btn" onclick="fcFeedback(true)">✅ 알았어요!</button>
       </div>
@@ -1948,7 +1948,7 @@ function renderFC() {
   const scene = document.getElementById('cardScene');
   scene.classList.remove('flipped');
   fcFlipped = false;
-  document.getElementById('fcControls').style.display = 'none';
+  document.getElementById('fcControls').style.visibility = 'hidden';
 }
 
 function flipCard() {
@@ -1956,13 +1956,13 @@ function flipCard() {
   fcFlipped = !fcFlipped;
   scene.classList.toggle('flipped', fcFlipped);
   if (fcFlipped) {
-    document.getElementById('fcControls').style.display = 'flex';
+    document.getElementById('fcControls').style.visibility = 'visible';
     // 자동재생
     if (autoPlayEnabled && fcCards.length) {
       setTimeout(() => playCardAudio(), 300);
     }
   } else {
-    document.getElementById('fcControls').style.display = 'none';
+    document.getElementById('fcControls').style.visibility = 'hidden';
     if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
     const btn = document.getElementById('fcAudioBtn');
     if (btn) { btn.classList.remove('playing'); btn.textContent = '🔊 듣기'; }
