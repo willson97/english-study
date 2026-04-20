@@ -5,83 +5,82 @@ Episode: 01. 일정 및 프로젝트 관리
 주제: 직장
 
 개발 막바지에 일정에 쫓기듯 진행되는 상황을 피하기 위해서, 개발 초기에 task 및 schedule이 잘 수립되어야 한다.
-To prevent a last-minute rush at the end of development, tasks and timelines should be clearly defined from the start.
+To prevent a last-minute rush at the end of development, tasks and timelines should be clearly defined from the start. [ep01_001]
 * last-minute rush: 마감에 몰리는 상황 (개발/IT 업계에서 자주 쓰임)
 * clearly defined: 명확히 정의된 (well-established)
 * from the start: 처음부터
 
 전화로 F2F 미팅을 5월에 진행하자고 요청했지만, 그 전에 화상회의를 먼저 진행하는 것이 좋을 것 같습니다.
-I reached out by phone to set up a face-to-face meeting in May, but I think it would be better to have a video call first.
+I reached out by phone to set up a face-to-face meeting in May, but I think it would be better to have a video call first. [ep01_002]
 * reach out: 연락을 취하다
 * set up a meeting: 미팅을 잡다
 * face-to-face meeting: 대면 미팅 (= in-person meeting)
 
 귀사 인원들의 가능한 시간을 알려주시기 바랍니다.
-Please let us know what time works best for your team.
+Please let us know what time works best for your team. [ep01_003]
 
-불량분석관련 업데이트 결과가 나오면 업데이트하겠다.
-I'll update you once the FA results are available.
-* 다른 표현: I'll share an updates as soon as there are any findings from the FA.
+불량분석 관련 업데이트 결과가 나오면 업데이트하겠다.
+I'll update you once the FA results are available. [ep01_004]
+* 다른 표현: I'll share an update as soon as there are any findings from the FA.
 
 내일 아침 출근하자마자 최우선 순위로 처리해 주세요.
-Please handle this as a top priority first thing tomorrow morning.
+Please handle this as a top priority first thing tomorrow morning. [ep01_005]
 * first thing tomorrow morning: 내일 아침에 일어나자마자, 출근하자마자
 
 내일 이걸 최우선 순위로 검토해 줄 수 있나요?
-Could you please look into this as a high priority tomorrow?
+Could you please look into this as a high priority tomorrow? [ep01_006]
 * look into: ~를 검토하다, 조사하다
 
-아래 그림의 Receptacle 구조를 고려하였을 때, 체결이 가능한 최대 Contact 들뜸량을 시물레이션 해주세요.
-Based on the receptacle structure shown in the image, please simulate the maximum allowable contact lift-off for successful mating.
+아래 그림의 Receptacle 구조를 고려하였을 때, 체결이 가능한 최대 Contact 들뜸량을 시뮬레이션 해주세요.
+Based on the receptacle structure shown in the image, please simulate the maximum allowable contact lift-off for successful mating. [ep01_007]
 
 아래 메일 본문에 추가 요청사항(#4)을 추가했습니다.
-I've added an additional request (#4) to the email body below.
+I've added an additional request (#4) to the email body below. [ep01_008]
 
 보내준 샘플별 이미지를 자세히 확인했는데, 1/29일 제조분은 확실히 interference amount(간섭량)가 작아 보입니다.
-I've carefully reviewed the images for each sample you sent, and the batch manufactured on Jan 29th clearly shows a smaller interference amount.
-* 다른 표현: After checking the sample images in detail, the interference amount for the Jan 29th production looks significnatly smaller.
+I've carefully reviewed the images for each sample you sent, and the batch manufactured on Jan 29th clearly shows a smaller interference amount. [ep01_009]
+* 다른 표현: After checking the sample images in detail, the interference amount for the Jan 29th production looks significantly smaller.
 
 답변과 이 건을 추가로 검토해 주셔서 감사합니다.
-Thank you for your response and for looking into this further.
+Thank you for your response and for looking into this further. [ep01_010]
 * look into: ~를 검토하다, 조사하다
 
-이전에 3d 모델링 파일을 받았으나, 조립 tree 없이 하나의 surface로만 구성된 파일이었음. 조립 tree 포함한 모델링 파일을 요청드립니다.
-We previously received the 3D modeling file, but it was composed of a single surface without an assembly tree. Could you please send us the modeling file including the assembly tree?
+이전에 3D 모델링 파일을 받았으나, 조립 tree 없이 하나의 surface로만 구성된 파일이었음. 조립 tree 포함한 모델링 파일을 요청드립니다.
+We previously received the 3D modeling file, but it was composed of a single surface without an assembly tree. Could you please send us the modeling file including the assembly tree? [ep01_011]
 * composed of: ~로 구성된
 
 다음 사항들을 요청드리고자 합니다.
-I would like to request the following items.
+I would like to request the following items. [ep01_012]
 
 이 과제의 납기를 한 달 정도 당겨야 할 것 같습니다.
-We need to move the deadline for this project up by about a month.
-* 다른 표현: We nee to pull in the deadline for this project by about a month.
+We need to move the deadline for this project up by about a month. [ep01_013]
+* 다른 표현: We need to pull in the deadline for this project by about a month.
 
-다음 회의 일정을 일주연 연기해야 겠어요.
-We need to push back our next meeting by a week.
-* 다른 표현(구어체): we need to put off our next meeting for a week.
+다음 회의 일정을 일주일 연기해야겠어요.
+We need to push back our next meeting by a week. [ep01_014]
+* 다른 표현(구어체): We need to put off our next meeting for a week.
 
 제 생각에, 이 문제는 단순 1차원 치수(dimension) 보다는 2차원 면적(area)의 개념으로 접근하는게 좋을 것 같습니다.
-I think it would be better to approach this in terms of 'area' rather than just a single 'dimension'.
-* in terms of: ~의 관점에서, ~의 측면에tj
+I think it would be better to approach this in terms of 'area' rather than just a single 'dimension'. [ep01_015]
+* in terms of: ~의 관점에서, ~의 측면에서
 
-3D 모델링 파일 관련, 완전한(complete) 파일이 불가하다면, 최소한 하우징과 터미널의 조립 형태를 확인할 수 잇는 파일을 요청드립니다.
-If you can't share the full 3D model, providing just the housing and terminal would work. I just want to check how they fit together in the assembly.
+3D 모델링 파일 관련, 완전한(complete) 파일이 불가하다면, 최소한 하우징과 터미널의 조립 형태를 확인할 수 있는 파일을 요청드립니다.
+If you can't share the full 3D model, providing just the housing and terminal would work. I just want to check how they fit together in the assembly. [ep01_016]
 
 방금 전에 보낸 메일 내용도 꼭 확인해 주세요.
-Please make sure to check the email I sent right before this one.
+Please make sure to check the email I sent right before this one. [ep01_017]
 
 지난 회의 이후 진행 사항 공유 요청드립니다. 그리고 4월 회의 일정도 제안(마지막 주차 제외) 요청드립니다.
-Could you please share a status update on the progress since our last meeting?
+Could you please share a status update on the progress since our last meeting? [ep01_018]
 
 금주 품목별 출하 계획 좀 알려 주세요.
-Could you please share this week's shipment plan for each item?
+Could you please share this week's shipment plan for each item? [ep01_019]
 
-답장을 마냥 기다릴 수 없으니, 일단 회신 가능한 일자부터 먼저 알려주세요. 이미 몇차례 말씀드린 사항입니다.
-I can't keep waiting for your reply, so please let me know the dates you can respond by first. I've mentioned this several times already.
+답장을 마냥 기다릴 수 없으니, 일단 회신 가능한 일자부터 먼저 알려주세요. 이미 몇 차례 말씀드린 사항입니다.
+I can't keep waiting for your reply, so please let me know the dates you can respond by first. I've mentioned this several times already. [ep01_020]
 
 그건 그렇고, 아래 2가지 사항 추가 문의드립니다.
-Moving on, I'd like to ask about the following two items.
+Moving on, I'd like to ask about the following two items. [ep01_021]
 
 귀사의 프로세스 및 제품에 대한 내부 승인 절차에 대해 설명 요청드립니다.
-please explain your internal approval process for both process and product.
-
+Please explain your internal approval process for both process and product. [ep01_022]
