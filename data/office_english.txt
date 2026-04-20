@@ -1,0 +1,19 @@
+출처: 직접 작성
+id: office_english
+
+Episode: 01. 일정 및 프로젝트 관리
+주제: 프로젝트 관리
+
+개발 막바지에 일정에 쫓기듯 진행되는 상황을 피하기 위해서, 개발 초기에 task 및 schedule이 잘 수립되어야 한다.
+To prevent a last-minute crunch at the end of development, tasks and timelines should be clearly defined from the start. [ep01_001]
+* last-minute crunch: 마감에 몰리는 상황 (개발/IT 업계에서 자주 쓰임)
+* clearly defined: 명확히 정의된
+* from the start: 처음부터
+
+개발 막바지에 일정에 쫓기듯 진행되는 상황을 피하기 위해서, 개발 초기에 task 및 schedule이 잘 수립되어야 한다.
+To avoid scrambling near the end of development, tasks and schedules need to be properly set up in the early stages. [ep01_002]
+* scrambling: 허둥지둥 쫓기듯 진행하는 것
+* near the end of: 막바지에
+* properly set up: 잘 수립되다
+* in the early stages: 초기에
+
