@@ -2,10 +2,10 @@
 빨모쌤 영어학습 — TTS 오디오 자동생성 스크립트
 =====================================================
 용도: txt 파일을 파싱해서 영어 문장을 mp3로 변환
-출력: audio/ppalmmo_epXX_NNN.mp3
+출력: audio/{id}_epXX_NNN.mp3
 
-파일명 규칙: ppalmmo_ep{에피소드번호:02d}_{에피소드내순번:03d}.mp3
-  예) ppalmmo_ep01_001.mp3, ppalmmo_ep06_013.mp3
+파일명 규칙: {txt의 id 값}_ep{에피소드번호:02d}_{에피소드내순번:03d}.mp3
+  예) ppalmmo_ep01_001.mp3, office_english_ep01_001.mp3
 
 사용법:
   python generate_audio.py                  # ID 없는 문장 자동처리 (txt 업데이트 + 오디오 생성)
@@ -39,11 +39,21 @@ import argparse
 GOOGLE_CREDENTIALS_JSON = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
 TXT_FILE     = "ppalmmo_live_for_now.txt"
 AUDIO_DIR    = "audio"
-AUDIO_PREFIX = "ppalmmo_"
 TTS_LANGUAGE = "en-US"
 TTS_VOICE    = "en-US-Journey-D"   # Journey-D: 남성 / Journey-F: 여성
 TTS_SPEED    = 0.9
 # ─────────────────────────────────────────────────────────────
+
+
+def get_prefix_from_txt(txt_path):
+    """txt 파일의 'id:' 값을 읽어 오디오 파일 접두사로 반환. 없으면 파일명 사용."""
+    with open(txt_path, encoding='utf-8') as f:
+        for line in f:
+            m = re.match(r'^id:\s*(\S+)', line.strip())
+            if m:
+                return m.group(1) + '_'
+    # fallback: 파일명(확장자 제외)
+    return os.path.splitext(os.path.basename(txt_path))[0] + '_'
 
 HAS_KOREAN = lambda t: any('\uAC00' <= c <= '\uD7A3' for c in t)
 ID_PATTERN = re.compile(r'\[ep(\d{2})_(\d{3})\]')
@@ -145,8 +155,8 @@ def update_txt(txt_path, sentences, lines):
         f.writelines(new_lines)
 
 
-def get_audio_path(audio_id):
-    return os.path.join(AUDIO_DIR, f'{AUDIO_PREFIX}{audio_id}.mp3')
+def get_audio_path(audio_id, prefix):
+    return os.path.join(AUDIO_DIR, f'{prefix}{audio_id}.mp3')
 
 
 def generate_mp3(client, text, out_path):
@@ -181,6 +191,8 @@ def main():
         print(f'❌ 파일을 찾을 수 없습니다: {args.txt}')
         sys.exit(1)
 
+    prefix = get_prefix_from_txt(args.txt)
+
     sentences, lines, ep_counter = parse_txt(args.txt)
     print(f'✅ 파싱 완료: {len(sentences)}개 문장')
 
@@ -194,7 +206,7 @@ def main():
 
     targets = []
     for s in sentences:
-        out_path = get_audio_path(s['audio_id'])
+        out_path = get_audio_path(s['audio_id'], prefix)
         if args.force or not os.path.exists(out_path):
             targets.append(s)
 
@@ -212,7 +224,7 @@ def main():
     if args.dry_run:
         for s in targets:
             label = '🆕' if s['new_id'] else '  '
-            print(f'  {label} [{s["audio_id"]}] {get_audio_path(s["audio_id"])}')
+            print(f'  {label} [{s["audio_id"]}] {get_audio_path(s["audio_id"], prefix)}')
             print(f'       "{s["english"][:60]}"')
         print(f'\n총 {len(targets)}개 (--dry-run: 실제 생성 안 함)')
         return
@@ -236,7 +248,7 @@ def main():
 
     success, failed = 0, []
     for s in targets:
-        out_path = get_audio_path(s['audio_id'])
+        out_path = get_audio_path(s['audio_id'], prefix)
         label = '🆕 ' if s['new_id'] else '   '
         try:
             print(f'  {label}[{s["audio_id"]}] 생성 중... "{s["english"][:50]}"', end='', flush=True)
