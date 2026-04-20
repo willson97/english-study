@@ -17,3 +17,9 @@ To avoid scrambling near the end of development, tasks and schedules need to be 
 * properly set up: 잘 수립되다
 * in the early stages: 초기에
 
+전화로 F2F 미팅을 5월에 진행하자고 요청했지만, 그 전에 화상회의를 먼저 진행하는 것이 좋을 것 같습니다.
+I reached out by phone to set up a face-to-face meeting in May, but I think it would be better to have a video call first. [ep01_003]
+* reach out: 연락을 취하다
+* set up a meeting: 미팅을 잡다
+* face-to-face meeting: 대면 미팅 (= in-person meeting)
+
