@@ -801,7 +801,7 @@ body::after {
 <body>
 
 <header class="header">
-  <div class="logo">빨모쌤 <span>English Lab</span><span class="revision">rev.2026.04.22-01</span></div>
+  <div class="logo">빨모쌤 <span>English Lab</span><span class="revision">rev.2026.04.22-02</span></div>
   <button class="episode-badge" onclick="toggleEpisodeSelector()">📚 에피소드 선택 ▾</button>
 </header>
 <div class="content-tabs-bar">
@@ -861,16 +861,16 @@ body::after {
         <button class="ctrl-btn danger" onclick="fcFeedback(false)">😓 다시 볼게요</button>
         <button class="ctrl-btn success-btn" onclick="fcFeedback(true)">✅ 알았어요!</button>
       </div>
+      <div class="card-controls">
+        <button class="ctrl-btn" onclick="fcPrev()">← 이전</button>
+        <button class="ctrl-btn" onclick="fcNext()">다음 →</button>
+      </div>
       <div style="display:flex;align-items:center;gap:10px;margin:4px 0;flex-wrap:wrap;justify-content:center;">
         <button class="audio-btn" id="fcAudioBtn" onclick="playCardAudio()">🔊 듣기</button>
         <div class="audio-auto-row">
           <div class="audio-toggle" id="autoPlayToggle" onclick="toggleAutoPlay()"></div>
           <span>카드 뒤집을 때 자동재생</span>
         </div>
-      </div>
-      <div class="card-controls">
-        <button class="ctrl-btn" onclick="fcPrev()">← 이전</button>
-        <button class="ctrl-btn" onclick="fcNext()">다음 →</button>
       </div>
     </div>
   </div>
