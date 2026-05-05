@@ -273,17 +273,16 @@ body::after {
   margin-bottom: 8px;
 }
 .card-hint {
-  font-size: 12px;
-  color: var(--text-dim);
+  font-size: 13px;
+  color: var(--text-muted);
   margin-top: 12px;
 }
 .card-vocab-front {
   margin-top: 14px;
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.8;
+  font-size: 13px;
+  color: #b0a8cc;
+  line-height: 1.9;
   font-family: 'JetBrains Mono', monospace;
-  opacity: 0.75;
 }
 .card-english {
   font-family: 'Playfair Display', serif;
@@ -293,9 +292,9 @@ body::after {
   margin-bottom: 12px;
 }
 .card-vocab {
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.8;
+  font-size: 13px;
+  color: #b0a8cc;
+  line-height: 1.9;
   font-family: 'JetBrains Mono', monospace;
 }
 .card-vocab span { color: var(--accent2); }
@@ -735,6 +734,33 @@ body::after {
 }
 .audio-toggle.on::after { left: 18px; background: var(--bg); }
 
+/* ── 섞기 플로팅 버튼 ── */
+.shuffle-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: all 0.2s;
+  z-index: 200;
+}
+.shuffle-fab:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  transform: scale(1.1);
+}
+
 /* ── 콘텐츠 전환 탭 ── */
 .content-tabs-bar {
   display: flex;
@@ -836,7 +862,6 @@ body::after {
       </div>
       <div class="card-controls">
         <button class="ctrl-btn" onclick="fcPrev()">← 이전</button>
-        <button class="ctrl-btn primary" onclick="shuffleFlashcards()">🔀 섞기</button>
         <button class="ctrl-btn" onclick="fcNext()">다음 →</button>
       </div>
     </div>
@@ -1886,6 +1911,7 @@ function currentEpisodes() { return currentContent().episodes; }
 let fcCards = [];
 let fcIdx = 0;
 let fcFlipped = false;
+let fcIsShuffled = false;
 
 // QUIZ STATE
 let quizItems = [];
@@ -2004,6 +2030,7 @@ function switchContent(key) {
   });
   renderEpisodeList();
   selectEpisode(0);
+  saveState();
 }
 
 function init() {
@@ -2013,8 +2040,52 @@ function init() {
     document.getElementById('fcKorean').textContent = '로드 오류 - 콘솔 확인';
     return;
   }
-  renderEpisodeList();
-  selectEpisode(0);
+
+  // 저장된 상태 복원
+  const saved = loadState();
+  if (saved && CONTENT_SETS[saved.contentKey]) {
+    // 콘텐츠 탭 전환
+    if (saved.contentKey !== currentContentKey) {
+      currentContentKey = saved.contentKey;
+      document.querySelectorAll('.content-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.key === saved.contentKey);
+      });
+    }
+    const savedEps = currentEpisodes();
+    const epIdx = (saved.epIdx >= -1 && saved.epIdx < savedEps.length) ? saved.epIdx : 0;
+    currentEpIdx = epIdx;
+    renderEpisodeList();
+    // 에피소드 badge 업데이트
+    if (epIdx === -1) {
+      document.querySelector('.episode-badge').textContent = `📚 전체 (All) ▾`;
+    } else {
+      const ep = savedEps[epIdx];
+      if (ep) document.querySelector('.episode-badge').textContent = `📚 ${ep.title} ▾`;
+    }
+    // 카드 목록 구성
+    fcCards = [...getCurrentSentences()];
+    // 섞기 상태 복원
+    if (saved.shuffled && saved.cardOrder) {
+      const ordered = [];
+      saved.cardOrder.forEach(id => {
+        const c = fcCards.find(c => c.audioId === id);
+        if (c) ordered.push(c);
+      });
+      if (ordered.length === fcCards.length) {
+        fcCards = ordered;
+        fcIsShuffled = true;
+      }
+    }
+    fcIdx = (saved.cardIdx >= 0 && saved.cardIdx < fcCards.length) ? saved.cardIdx : 0;
+    fcFlipped = false;
+    renderFC();
+    startQuiz();
+    initFill();
+    initConv();
+  } else {
+    renderEpisodeList();
+    selectEpisode(0);
+  }
 }
 
 function renderEpisodeList() {
@@ -2048,6 +2119,7 @@ function selectEpisode(idx) {
   startQuiz();
   initFill();
   initConv();
+  saveState();
 }
 
 function toggleEpisodeSelector(forceClose) {
@@ -2071,16 +2143,44 @@ function switchTab(id, btn) {
 // ============================================================
 function initFlashcards() {
   fcCards = [...getCurrentSentences()];
+  fcIsShuffled = false;
   fcIdx = 0;
   fcFlipped = false;
   renderFC();
+  saveState();
+}
+
+// ============================================================
+//  STATE PERSISTENCE
+// ============================================================
+const STATE_KEY = 'ppalmmo_state';
+
+function saveState() {
+  const state = {
+    contentKey: currentContentKey,
+    epIdx: currentEpIdx,
+    cardIdx: fcIdx,
+    shuffled: fcIsShuffled,
+    cardOrder: fcCards.map(c => c.audioId),
+  };
+  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STATE_KEY));
+    if (!s) return null;
+    return s;
+  } catch(e) { return null; }
 }
 
 function shuffleFlashcards() {
   fcCards = [...fcCards].sort(() => Math.random() - 0.5);
+  fcIsShuffled = true;
   fcIdx = 0;
   fcFlipped = false;
   renderFC();
+  saveState();
   showToast('🔀 카드를 섞었습니다!');
 }
 
@@ -2136,18 +2236,21 @@ function fcFeedback(knew) {
   }
   fcFlipped = false;
   renderFC();
+  saveState();
 }
 
 function fcNext() {
   fcIdx = (fcIdx + 1) % fcCards.length;
   fcFlipped = false;
   renderFC();
+  saveState();
 }
 
 function fcPrev() {
   fcIdx = (fcIdx - 1 + fcCards.length) % fcCards.length;
   fcFlipped = false;
   renderFC();
+  saveState();
 }
 
 // ============================================================
@@ -2599,5 +2702,6 @@ function showToast(msg) {
 init();
 </script>
 <div class="copy-toast" id="copyToast">복사되었습니다</div>
+<button class="shuffle-fab" id="shuffleFab" onclick="shuffleFlashcards()" title="섞기">🔀</button>
 </body>
 </html>
