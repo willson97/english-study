@@ -303,6 +303,14 @@ body::after {
   display: flex;
   gap: 10px;
   margin-top: 8px;
+  width: 100%;
+  max-width: 560px;
+  justify-content: flex-start;
+  padding-left: 4px;
+}
+.card-controls.card-controls-center {
+  justify-content: center;
+  padding-left: 0;
 }
 .ctrl-btn {
   padding: 10px 24px;
@@ -849,7 +857,7 @@ body::after {
           </div>
         </div>
       </div>
-      <div class="card-controls" id="fcControls" style="visibility:hidden">
+      <div class="card-controls card-controls-center" id="fcControls" style="visibility:hidden">
         <button class="ctrl-btn danger" onclick="fcFeedback(false)">😓 다시 볼게요</button>
         <button class="ctrl-btn success-btn" onclick="fcFeedback(true)">✅ 알았어요!</button>
       </div>
