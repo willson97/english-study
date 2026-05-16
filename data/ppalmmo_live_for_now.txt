@@ -1,5 +1,5 @@
 출처: 빨모쌤
-id: ppalmmo_live
+id: ppalmmo
 
 Episode: 01. Let's use this For now. 일단은 이거 쓰자.
 주제: 일상
@@ -796,3 +796,76 @@ It's not just about how much they stole. It's also about who they stole from tha
 * scam: 사기
 * cruel: 잔인한
 
+Episode: 11. He does a good job of managing his money. 그는 돈 관리를 잘해.
+주제: 일상
+
+동호회 회장으로서 그는 돈 관리를 잘했어요.
+As president of the club, he did a good job of managing the funds. [ep11_001]
+* did a good job of
+
+악성코드로부터 여러분의 컴퓨터를 보호하는 기능을 잘해냅니다.
+It does a good job of protecting your computer from malware. [ep11_002]
+* does a good job of
+
+{
+어, 이거 살충기지? 나도 이런 거 하나 사려고 알아보고 있는데, 어때?
+Oh, this is a bug zapper, right? I've been looking to get one of these. How is it? [ep11_003]
+
+뭐, 벌레 죽이는 일은 잘하는 것 같아
+Well, it seem to do a good job of killing bugs. [ep11_004]
+* do a good job of: ~를 잘하다, ~를 잘해내다
+
+벌레를 잘 유인하기도 해?
+Does it do a good job of attracting them as well? [ep11_005]
+* do a good job of: ~를 잘하다, ~를 잘해내다
+
+글쎄, 그건 잘 모르겠어. 벌레들이 원래 빛에 유인되는 거 맞지? 그 이상으로 뭘 하는지는 잘 모르겠어.
+I can't really say. Bugs are attracted to light, right? I don't know if it's doing anything beyond that. [ep11_006]
+* doing anything beyond that: 그 이상으로 뭘 하는지
+}
+
+그들의 이야기를 적절한 속도로 정말 잘 전달한 것 같아.
+I think they did a really good job of pacing the story. [ep11_007]
+* pace: (이야기 등의) 속도, 전개 속도
+* do a good job of: ~를 잘하다, ~를 잘해내다
+
+그녀는 승객들을 안심시키는 역할을 아주 잘해냈어요.
+She did a really good job of keeping the passengers calm. [ep11_008]
+* keep someone calm: ~를 안심시키다
+* do a good job of: ~를 잘하다, ~를 잘해내다
+
+90년대의 느낌을 아주 잘 살렸어.
+They did a very good job of capturing the essence of the 90's. [ep11_009]
+* essence: 본질, 정수
+* do a very good job of: ~를 아주 잘하다, ~를 아주 잘해내다
+
+새 모델이 열을 분산시키는 일을 훨씬 더 잘해.
+The new model does a much better job of dissipating heat. [ep11_010]
+* dissipate heat: 열을 분산시키다
+* do a much better job of: ~를 훨씬 더 잘하다, ~를 훨씬 더 잘해내다
+
+누가 썼는지는 몰라도 편파적이지 않게 사실만 잘 정리했네.
+Whoever worte this did a good job of laying out the facts in an unbiased manner. [ep11_011]
+* lay out: 정리하다, 제시하다
+* unbiased: 편견 없는
+* manner: 방식, 태도
+
+그는 자신의 행적을 잘 감추지 못했어요.
+He didn't do a very good job of hiding his tracks. [ep11_012]
+* hide one's tracks: 자신의 흔적을 감추다
+
+그들은 고객들의 마음을 잘 이해하지 못하고 있다.
+They're doing a poor job of understanding their customers. [ep11_013]
+* do a poor job of: 제대로 못하다, 서투르게 하다
+
+앞으로는 정리를 더 잘하면서 해야 돼.
+We need to doa better job of staying organized from now on. [ep11_014]
+* stay organized: 체계적인 상태를 유지하다, 정리를 잘하다
+
+특수 효과를 정말 잘 만들었어.
+They did a good job with the special effects. [ep11_015]
+* do a good job with: ~를 잘하다
+
+메뉴 디자인이 너무 별로야.
+They did a terrible job with the menu design. [ep11_016]
+* do a terrible job with: ~를 형편없이 하다, 끔찍하게 하다
